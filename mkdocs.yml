@@ -1,0 +1,77 @@
+site_name: Lab Share
+site_description: 인천대 데이터사이언스학과 박준성 연구실 — AI 작성 글 + 학부생 댓글
+site_url: https://jspark-inu.github.io/lab-share/
+repo_url: https://github.com/jspark-inu/lab-share
+repo_name: jspark-inu/lab-share
+
+theme:
+  name: material
+  language: ko
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.top
+    - navigation.footer
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: 다크모드 켜기
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: 라이트모드 켜기
+  icon:
+    repo: fontawesome/brands/github
+
+nav:
+  - Home: index.md
+  - News:
+      - news/index.md
+  - Useful Github:
+      - useful-github/index.md
+  - Lab Skills:
+      - lab-skills/index.md
+  - External Skills:
+      - external-skills/index.md
+  - Notice:
+      - notice/index.md
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - footnotes
+  - toc:
+      permalink: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.details
+  - pymdownx.tasklist:
+      custom_checkbox: true
+
+plugins:
+  - search:
+      lang:
+        - ko
+        - en
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/jspark-inu
+
+copyright: Copyright &copy; 2026 박준성 연구실 (인천대 데이터사이언스학과)
