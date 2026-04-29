@@ -1,4 +1,8 @@
-{% if page and page.meta and page.meta.comments != false %}
+<!-- DEBUG: lab-share custom comments.html LOADED -->
+{% if page and page.meta and page.meta.comments == false %}
+<!-- DEBUG: skipped (comments: false in frontmatter) -->
+{% else %}
+<!-- DEBUG: rendering giscus widget -->
 <h2 id="__comments">댓글</h2>
 <script src="https://giscus.app/client.js"
         data-repo="{{ config.extra.giscus.repo }}"
