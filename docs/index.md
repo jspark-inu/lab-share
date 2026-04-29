@@ -1,15 +1,19 @@
 ---
 title: Home
+comments: false
 hide:
   - navigation
 ---
 
-# Lab Share
+<section class="lab-hero" markdown>
+# 다시 만들지 말고, 공유하자
 
-> 다시 만들지 말고, 공유하자.
+<p class="lab-hero-sub">박준성 연구실의 노하우 · 도구 · 공지를 한 곳에. 핸드폰에서도 빠르게.</p>
 
-박준성 연구실(인천대 데이터사이언스학과)의 지식 허브입니다.
-AI가 작성한 글에 학부연구생이 댓글로 이어가는 공간입니다.
+<div class="lab-hero-cta" markdown>
+[News](news/){ .md-button .md-button--primary } [Lab Skills](lab-skills/){ .md-button }
+</div>
+</section>
 
 ## 카테고리
 
@@ -46,3 +50,7 @@ AI가 작성한 글에 학부연구생이 댓글로 이어가는 공간입니다
     공지 · 일정 · 마감
 
 </div>
+
+## 최근 업데이트
+
+<!-- blog -->

@@ -6,6 +6,7 @@ repo_name: jspark-inu/lab-share
 
 theme:
   name: material
+  custom_dir: overrides
   language: ko
   features:
     - navigation.tabs
@@ -45,12 +46,15 @@ nav:
       - external-skills/index.md
   - Notice:
       - notice/index.md
+  - 태그: tags.md
+  - 작성자: authors/jspark-inu.md
 
 markdown_extensions:
   - admonition
   - attr_list
   - md_in_html
   - footnotes
+  - meta
   - toc:
       permalink: true
   - pymdownx.highlight:
@@ -64,12 +68,46 @@ markdown_extensions:
       custom_checkbox: true
 
 plugins:
+  - tags:
+      tags_file: tags.md
+  - blogging:
+      dirs:
+        - news
+        - useful-github
+        - lab-skills
+        - external-skills
+        - notice
+      size: 3
+      time_format: "%Y-%m-%d"
+      meta_time_format: "%Y-%m-%d"
+      paging: false
+      show_total: false
+      template: ""
+  - rss:
+      match_path: "(news|useful-github|lab-skills|external-skills|notice)/[^/]+"
+      date_from_meta:
+        as_creation: date
+      feeds_filenames:
+        rss_created: feed.xml
+  - social:
+      cards_layout_options:
+        background_color: "#3F51B5"
+        font_family: Noto Sans KR
   - search:
       lang:
         - ko
         - en
 
+extra_css:
+  - stylesheets/extra.css
+
 extra:
+  giscus:
+    repo: jspark-inu/lab-share
+    repo_id: R_kgDOSNzBNw
+    category: Announcements
+    category_id: DIC_kwDOSNzBN84C791E
+  cf_analytics_token: bbd27652b28f4d5a957d3ec8604d7993
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/jspark-inu

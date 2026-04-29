@@ -22,9 +22,19 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Install dependencies
+      - name: Install system dependencies (Cairo + Pango + Korean fonts for social plugin)
         run: |
-          pip install mkdocs-material
+          sudo apt-get update
+          sudo apt-get install -y libcairo2-dev libpango1.0-dev fonts-noto-cjk
+
+      - name: Install Python dependencies
+        run: |
+          pip install \
+            "mkdocs-material[imaging]" \
+            mkdocs-blogging-plugin \
+            mkdocs-rss-plugin \
+            "pillow>=10.0" \
+            "cairosvg>=2.7"
 
       - name: Deploy to gh-pages
         run: mkdocs gh-deploy --force --clean --verbose

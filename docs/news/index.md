@@ -1,3 +1,8 @@
+---
+title: News
+comments: false
+---
+
 # News
 
 학과·연구실 소식과 외부 트렌드 요약.
