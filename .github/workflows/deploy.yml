@@ -31,7 +31,6 @@ jobs:
         run: |
           pip install \
             "mkdocs-material[imaging]" \
-            mkdocs-blogging-plugin \
             mkdocs-rss-plugin \
             "pillow>=10.0" \
             "cairosvg>=2.7"

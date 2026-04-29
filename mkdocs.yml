@@ -70,18 +70,6 @@ markdown_extensions:
 plugins:
   - tags:
       tags_file: tags.md
-  - blogging:
-      dirs:
-        - news
-        - useful-github
-        - lab-skills
-        - external-skills
-        - notice
-      size: 3
-      time_format: "%Y-%m-%d"
-      meta_time_format: "%Y-%m-%d"
-      paging: false
-      show_total: false
   - rss:
       match_path: "(news|useful-github|lab-skills|external-skills|notice)/[^/]+"
       date_from_meta:
