@@ -1,98 +1,350 @@
-/* === Lab Share — Custom Styles === */
+/* HAI Lab Share - internal workspace skin */
 
-/* Hero 섹션 (홈 상단) */
-.lab-hero {
-  margin: 0 -1rem 2rem -1rem;
-  padding: 3rem 2rem 2.5rem 2rem;
-  background: linear-gradient(135deg, #3f51b5 0%, #5c6bc0 50%, #7986cb 100%);
-  color: #fff;
-  border-radius: 0.5rem;
-  text-align: center;
-  box-shadow: 0 4px 16px rgba(63, 81, 181, 0.18);
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable.min.css");
+
+:root {
+  --hai-bg: #f6f5f1;
+  --hai-surface: #ffffff;
+  --hai-surface-2: #efeee9;
+  --hai-ink: #202124;
+  --hai-muted: #69707d;
+  --hai-faint: #9298a3;
+  --hai-line: rgba(32, 33, 36, 0.1);
+  --hai-line-strong: rgba(32, 33, 36, 0.16);
+  --hai-accent: #18776f;
+  --hai-blue: #3867c8;
+  --hai-green: #16875d;
+  --hai-amber: #a66b00;
+  --hai-red: #c73f54;
+  --hai-radius: 8px;
 }
 
-.lab-hero h1 {
-  margin: 0 0 0.75rem 0;
-  font-size: 2.2rem;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  color: #fff !important;
+[data-md-color-scheme="slate"] {
+  --hai-bg: #11121a;
+  --hai-surface: #181a24;
+  --hai-surface-2: #202332;
+  --hai-ink: #f0f2f6;
+  --hai-muted: #a7afbd;
+  --hai-faint: #727b8f;
+  --hai-line: rgba(255, 255, 255, 0.09);
+  --hai-line-strong: rgba(255, 255, 255, 0.16);
+  --hai-accent: #9ee7de;
+  --hai-blue: #8db7ff;
+  --hai-green: #4fd6a7;
+  --hai-amber: #f5c86a;
+  --hai-red: #ff7d91;
 }
 
-.lab-hero p.lab-hero-sub {
-  margin: 0 0 1.25rem 0;
+body,
+input {
+  font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+body {
+  background: var(--hai-bg);
+}
+
+.md-main {
+  background: var(--hai-bg);
+}
+
+.md-main__inner {
+  max-width: 1440px;
+}
+
+.md-content__inner {
+  margin: 0 auto;
+  padding-top: 1.2rem;
+}
+
+.md-typeset {
+  color: var(--hai-ink);
+}
+
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3 {
+  letter-spacing: -0.03em;
+}
+
+.md-typeset h1 {
+  margin: 0;
+  color: var(--hai-ink);
+  font-size: clamp(2rem, 4vw, 3.65rem);
+  font-weight: 800;
+  line-height: 1.04;
+}
+
+.md-typeset h2 {
+  margin: 0 0 0.75rem;
+  color: var(--hai-ink);
   font-size: 1.05rem;
-  opacity: 0.92;
+  font-weight: 760;
+}
+
+.md-typeset p {
+  color: var(--hai-muted);
+}
+
+.md-button {
+  border-radius: 7px !important;
+  box-shadow: none !important;
+  font-weight: 700;
+}
+
+.md-button--primary {
+  background: var(--hai-accent) !important;
+  border-color: var(--hai-accent) !important;
+  color: var(--hai-bg) !important;
+}
+
+.erp-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(300px, 0.75fr);
+  gap: 1rem;
+  margin: 0 0 1rem;
+}
+
+.erp-hero-copy,
+.erp-hero-panel,
+.metric-card,
+.workspace-main,
+.workspace-side,
+.project-row,
+.update-item,
+.quick-links a,
+.check-panel,
+.principle-card {
+  border: 1px solid var(--hai-line);
+  border-radius: var(--hai-radius);
+  background: var(--hai-surface);
+}
+
+.erp-hero-copy {
+  padding: clamp(1.3rem, 3vw, 2.4rem);
+}
+
+.erp-kicker,
+.panel-label,
+.metric-card span,
+.row-eyebrow,
+.update-item span,
+.quick-links span {
+  display: inline-flex;
+  color: var(--hai-faint);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.erp-hero-copy > p {
+  max-width: 44rem;
+  margin: 1rem 0 0;
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+.erp-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1.4rem;
+}
+
+.erp-hero-panel {
+  align-content: start;
+  display: grid;
+  padding: 1.1rem;
+}
+
+.erp-hero-panel table {
+  margin: 1rem 0 0;
+  border: 0;
+  font-size: 0.75rem;
+}
+
+.erp-hero-panel table th {
+  color: var(--hai-faint);
+  font-size: 0.66rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.erp-hero-panel table th,
+.erp-hero-panel table td {
+  border-color: var(--hai-line);
+  padding: 0.58rem 0.25rem;
+}
+
+.metric-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin: 0 0 1rem;
+}
+
+.metric-card {
+  min-height: 8rem;
+  padding: 1rem;
+}
+
+.metric-card strong {
+  display: block;
+  margin-top: 0.45rem;
+  color: var(--hai-ink);
+  font-size: 1.75rem;
+  font-weight: 820;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+}
+
+.metric-card small {
+  display: block;
+  margin-top: 0.35rem;
+  color: var(--hai-muted);
+  font-size: 0.75rem;
+  line-height: 1.45;
+}
+
+.workspace-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(320px, 0.7fr);
+  gap: 1rem;
+}
+
+.workspace-main,
+.workspace-side {
+  padding: 1rem;
+}
+
+.project-board,
+.update-list,
+.quick-links {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.project-board {
+  margin-bottom: 1.4rem;
+}
+
+.project-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 1rem;
+  align-items: start;
+  padding: 1rem;
+  background: var(--hai-surface-2);
+}
+
+.project-row strong,
+.update-item strong,
+.quick-links strong {
+  display: block;
+  margin-top: 0.18rem;
+  color: var(--hai-ink);
+  font-size: 0.92rem;
+}
+
+.project-row p {
+  margin: 0.38rem 0 0;
+  font-size: 0.78rem;
   line-height: 1.6;
 }
 
-.lab-hero .lab-hero-cta {
+.status-chip {
   display: inline-flex;
-  gap: 0.75rem;
-  flex-wrap: wrap;
+  align-items: center;
   justify-content: center;
+  min-width: 5.4rem;
+  padding: 0.27rem 0.55rem;
+  border: 1px solid var(--hai-line-strong);
+  border-radius: 999px;
+  background: var(--hai-surface);
+  color: var(--hai-muted);
+  font-size: 0.68rem;
+  font-weight: 800;
+  white-space: nowrap;
 }
 
-.lab-hero .lab-hero-cta a {
-  display: inline-block;
-  padding: 0.5rem 1.1rem;
-  background: rgba(255, 255, 255, 0.18);
-  color: #fff !important;
-  text-decoration: none;
-  border-radius: 0.4rem;
-  font-weight: 500;
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  transition: background 0.15s ease;
+.status-chip.done {
+  color: var(--hai-green);
 }
 
-.lab-hero .lab-hero-cta a:hover {
-  background: rgba(255, 255, 255, 0.28);
+.status-chip.warning {
+  color: var(--hai-amber);
 }
 
-/* Dark mode hero 보정 */
-[data-md-color-scheme="slate"] .lab-hero {
-  background: linear-gradient(135deg, #283593 0%, #3949ab 50%, #5c6bc0 100%);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+.update-item,
+.quick-links a {
+  display: block;
+  padding: 0.85rem;
+  transition: border-color 0.15s ease, transform 0.15s ease, background 0.15s ease;
 }
 
-/* 모바일 hero 축소 */
-@media (max-width: 600px) {
-  .lab-hero {
-    padding: 2rem 1rem 1.75rem 1rem;
-    margin: 0 -0.5rem 1.5rem -0.5rem;
-  }
-  .lab-hero h1 {
-    font-size: 1.6rem;
-  }
-  .lab-hero p.lab-hero-sub {
-    font-size: 0.95rem;
-  }
+.update-item:hover,
+.quick-links a:hover {
+  border-color: var(--hai-line-strong);
+  background: var(--hai-surface-2);
+  transform: translateY(-1px);
 }
 
-/* Recent Updates 섹션 헤더 강조 */
-.md-typeset h2#최근-업데이트 {
-  margin-top: 2.5rem;
-  padding-bottom: 0.4rem;
-  border-bottom: 2px solid var(--md-primary-fg-color);
+.update-item small {
+  display: block;
+  margin-top: 0.25rem;
+  color: var(--hai-muted);
+  font-size: 0.75rem;
 }
 
-/* giscus 컨테이너 약간의 여유 */
+.workspace-side h2:not(:first-child) {
+  margin-top: 1.25rem;
+}
+
+.quick-links a {
+  color: inherit;
+}
+
+.check-panel {
+  padding: 0.85rem 1rem;
+  background: var(--hai-surface-2);
+}
+
+.check-panel .task-list {
+  margin: 0;
+}
+
+.check-panel li {
+  margin: 0.35rem 0;
+  color: var(--hai-muted);
+  font-size: 0.78rem;
+}
+
+.principle-card {
+  padding: 1rem;
+  border-left: 3px solid var(--hai-accent);
+  background: var(--hai-surface-2);
+  color: var(--hai-muted);
+  font-size: 0.82rem;
+  line-height: 1.7;
+}
+
+/* Legacy article helpers */
 h2#__comments {
   margin-top: 3rem;
   padding-top: 1rem;
-  border-top: 1px solid var(--md-default-fg-color--lightest);
+  border-top: 1px solid var(--hai-line);
 }
 
-/* 작성자 페이지 — 프로필 카드 */
 .author-card {
   display: flex;
   align-items: center;
   gap: 1rem;
   padding: 1rem;
   margin: 1.5rem 0;
-  background: var(--md-default-bg-color);
-  border: 1px solid var(--md-default-fg-color--lightest);
-  border-radius: 0.5rem;
+  border: 1px solid var(--hai-line);
+  border-radius: var(--hai-radius);
+  background: var(--hai-surface);
 }
 
 .author-card img {
@@ -103,12 +355,53 @@ h2#__comments {
 }
 
 .author-card .author-info h3 {
-  margin: 0 0 0.25rem 0;
+  margin: 0 0 0.25rem;
   font-size: 1.1rem;
 }
 
 .author-card .author-info p {
   margin: 0;
-  color: var(--md-default-fg-color--light);
+  color: var(--hai-muted);
   font-size: 0.9rem;
+}
+
+@media (max-width: 980px) {
+  .erp-hero,
+  .workspace-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .metric-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .md-content__inner {
+    padding-top: 0.6rem;
+  }
+
+  .erp-hero-copy,
+  .erp-hero-panel,
+  .workspace-main,
+  .workspace-side {
+    padding: 0.85rem;
+  }
+
+  .metric-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .metric-card {
+    min-height: auto;
+  }
+
+  .project-row {
+    grid-template-columns: 1fr;
+  }
+
+  .status-chip {
+    justify-content: flex-start;
+    width: max-content;
+  }
 }

@@ -1,5 +1,5 @@
 site_name: Lab Share
-site_description: 인천대 데이터사이언스학과 박준성 연구실 — AI 작성 글 + 학부생 댓글
+site_description: 인천대 HAI 연구실 내부 지식 공유와 프로젝트 운영 허브
 site_url: https://lab.haiinu.com/
 repo_url: https://github.com/jspark-inu/lab-share
 repo_name: jspark-inu/lab-share
@@ -23,14 +23,14 @@ theme:
       accent: indigo
       toggle:
         icon: material/brightness-7
-        name: 다크모드 켜기
+        name: 다크 모드 켜기
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
       primary: indigo
       accent: indigo
       toggle:
         icon: material/brightness-4
-        name: 라이트모드 켜기
+        name: 라이트 모드 켜기
   icon:
     repo: fontawesome/brands/github
 
@@ -102,4 +102,4 @@ extra:
     - icon: fontawesome/brands/github
       link: https://github.com/jspark-inu
 
-copyright: Copyright &copy; 2026 박준성 연구실 (인천대 데이터사이언스학과)
+copyright: Copyright &copy; 2026 HAI Lab, Incheon National University
