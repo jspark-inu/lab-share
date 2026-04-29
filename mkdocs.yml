@@ -82,7 +82,6 @@ plugins:
       meta_time_format: "%Y-%m-%d"
       paging: false
       show_total: false
-      template: ""
   - rss:
       match_path: "(news|useful-github|lab-skills|external-skills|notice)/[^/]+"
       date_from_meta:
