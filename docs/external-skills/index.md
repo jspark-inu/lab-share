@@ -1,28 +1,63 @@
-﻿---
+---
 title: External Skills
 comments: false
+hide:
+  - navigation
 ---
 
-<section class="linear-list-page">
-  <header class="linear-page-head">
-    <span class="eyebrow">Workflows</span>
-    <h1>External Skills</h1>
-    <p>랩 밖에서 발견한 도구·스킬·워크플로우를 연구실 작업에 맞게 재해석합니다.</p>
-  </header>
+<section class="linear-app">
+  <aside class="linear-rail">
+    <div class="window-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+    <div class="workspace-switcher"><div class="workspace-logo">H</div><strong>HAI Lab</strong><span>⌄</span></div>
+    <nav class="primary-nav" aria-label="Workspace navigation">
+      <a href="../notice/"><span class="nav-glyph">⌂</span>Inbox <em>3</em></a>
+      <a href="../lab-skills/"><span class="nav-glyph">◌</span>My issues</a>
+      <a href="../news/"><span class="nav-glyph">↯</span>Pulse <em>1</em></a>
+    </nav>
+    <div class="nav-block">
+      <p>Workspace</p>
+      <a href="../news/"><span class="nav-glyph">⌃</span>Initiatives</a>
+      <a href="../"><span class="nav-glyph">◇</span>Projects</a>
+      <a href="../tags/"><span class="nav-glyph">▱</span>Views</a>
+      <a href="../authors/jspark-inu/"><span class="nav-glyph">▣</span>Teams</a>
+      <a href="../notice/"><span class="nav-glyph">⋯</span>More</a>
+    </div>
+    <div class="nav-block">
+      <p>Your teams</p>
+      <a href="../lab-skills/"><span class="team-chip blue">R</span>Research ops <b>›</b></a>
+      <a href="../useful-github/"><span class="team-chip purple">T</span>Tooling <b>›</b></a>
+      <a class="active" href="./"><span class="team-chip mint">W</span>Workflows <b>›</b></a>
+    </div>
+  </aside>
 
-  <div class="linear-list">
-    <a class="linear-list-item" href="2026-04-27-claude-code-워크플로우/">
-      <div class="linear-list-title">
-        <span class="project-dot indigo">●</span>
-        <div>
-          <strong>Claude Code, 학부연구생용 핵심 워크플로우 4개</strong>
-          <em>노트 정리, 디버깅, 검증, 문서화 루틴</em>
-        </div>
+  <main class="project-surface">
+    <header class="project-chrome">
+      <div class="chrome-left"><span>←</span><span>→</span><span>◷</span></div>
+      <div class="chrome-title">◇ External Skills</div>
+      <div class="chrome-right"><span>＋</span></div>
+    </header>
+    <section class="project-tabs">
+      <div class="tabs-left">
+        <a class="tab-link strong" href="./">External Skills</a>
+        <a class="tab-link active" href="./">◇ All workflows</a>
+        <a class="tab-link" href="../lab-skills/">Lab Skills</a>
+        <a class="tab-link" href="../useful-github/">Tooling</a>
+        <a class="tab-link quiet" href="../tags/">Tags</a>
       </div>
-      <span class="linear-list-meta">Workflow</span>
-      <span class="linear-list-date">2026-04-27</span>
-      <span class="linear-list-pill">Published</span>
-    </a>
-  </div>
+      <div class="tabs-actions"><a href="../notice/">＋ Suggest workflow</a><button type="button">Display</button></div>
+    </section>
+    <section class="filter-row"><span>≡</span><strong>Filter</strong></section>
+    <section class="projects-table" aria-label="External skills table">
+      <div class="table-head"><span>Name</span><span>Health</span><span>Priority</span><span>Lead</span><span>Target Date</span><span>Status</span></div>
+      <div class="quarter-row"><strong>Workflows</strong><span>＋</span></div>
+      <a class="project-row" href="2026-04-27-claude-code-워크플로우/">
+        <div class="name-cell"><span class="project-dot indigo">●</span><strong>Claude Code 핵심 워크플로우 4개</strong><em>note · debug · verify · document</em></div>
+        <div class="health-cell"><span class="spinner"></span>On track · shared</div>
+        <div class="priority-cell bars"><i></i><i></i><i></i></div>
+        <div class="lead-cell">WK</div>
+        <div class="date-cell"><span class="calendar-icon">▣</span>Q2 2026</div>
+        <div class="status-cell blue"><span class="ring"></span>100%</div>
+      </a>
+    </section>
+  </main>
 </section>
-

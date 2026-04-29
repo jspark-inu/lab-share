@@ -165,55 +165,6 @@ body,
   overflow: hidden;
 }
 
-.linear-list-page {
-  display: grid;
-  grid-template-columns: 236px minmax(0, 1fr);
-  min-height: 100vh;
-  border: 0;
-  border-radius: 0;
-  background: var(--panel);
-}
-
-.linear-list-page::before {
-  content: "HAI Lab\A\AInbox        3\AMy issues\APulse        1\A\AWorkspace\AInitiatives\AProjects\AViews\ATeams\AMore\A\AYour teams\AResearch ops\ATooling\AWorkflows";
-  white-space: pre-line;
-  display: block;
-  padding: 44px 12px 16px;
-  border-right: 1px solid var(--line-dark);
-  background:
-    radial-gradient(circle at 18px 16px, #ff5f57 0 5px, transparent 6px),
-    radial-gradient(circle at 38px 16px, #ffbd2e 0 5px, transparent 6px),
-    radial-gradient(circle at 58px 16px, #28c840 0 5px, transparent 6px),
-    var(--rail);
-  color: #363836;
-  font-size: 14px;
-  font-weight: 610;
-  line-height: 2.05;
-}
-
-.linear-list-page::after {
-  content: "←    →     ◷                                      ◇ Projects                                      ＋";
-  position: fixed;
-  top: 0;
-  right: 0;
-  left: 236px;
-  z-index: 3;
-  height: 32px;
-  padding: 0 18px;
-  border-bottom: 1px solid var(--line);
-  background: #f5f6f3;
-  color: #383a38;
-  font-size: 14px;
-  font-weight: 700;
-  line-height: 32px;
-  text-align: center;
-}
-
-.linear-list-page > .linear-page-head,
-.linear-list-page > .linear-list {
-  grid-column: 2;
-}
-
 .linear-page-head {
   margin-top: 75px;
   padding: 0 32px 14px;
@@ -274,19 +225,6 @@ body,
 
 .linear-list {
   display: grid;
-}
-
-.linear-list::before {
-  content: "Name                                     Health             Priority      Lead        Target Date       Status";
-  display: grid;
-  align-items: center;
-  height: 32px;
-  padding: 0 32px;
-  border-bottom: 1px solid var(--line);
-  color: #686c68;
-  font-size: 13px;
-  font-weight: 640;
-  white-space: pre;
 }
 
 .linear-list-item {
@@ -362,21 +300,16 @@ body,
 
 body:has(.linear-app) .md-header,
 body:has(.linear-app) .md-tabs,
-body:has(.linear-app) .md-sidebar,
-body:has(.linear-list-page) .md-header,
-body:has(.linear-list-page) .md-tabs,
-body:has(.linear-list-page) .md-sidebar {
+body:has(.linear-app) .md-sidebar {
   display: none;
 }
 
-body:has(.linear-app) .md-main__inner,
-body:has(.linear-list-page) .md-main__inner {
+body:has(.linear-app) .md-main__inner {
   max-width: none;
   margin: 0;
 }
 
-body:has(.linear-app) .md-content,
-body:has(.linear-list-page) .md-content {
+body:has(.linear-app) .md-content {
   min-width: 0;
 }
 
@@ -392,15 +325,6 @@ body:has(.linear-app) .md-content__inner {
 body:has(.linear-app) .md-content__inner::before,
 body:has(.linear-app) .md-content__inner::after {
   display: none;
-}
-
-body:has(.linear-list-page) .md-content__inner {
-  max-width: none;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  border-radius: 0;
-  background: transparent;
 }
 
 .md-typeset {
@@ -930,28 +854,13 @@ h2#__comments {
 }
 
 @media (max-width: 860px) {
-  .linear-app,
-  .linear-list-page {
+  .linear-app {
     grid-template-columns: 1fr;
   }
 
-  .linear-rail,
-  .linear-list-page::before {
+  .linear-rail {
     border-right: 0;
     border-bottom: 1px solid var(--line-dark);
-  }
-
-  .linear-list-page::before {
-    padding-top: 44px;
-  }
-
-  .linear-list-page::after {
-    left: 0;
-  }
-
-  .linear-list-page > .linear-page-head,
-  .linear-list-page > .linear-list {
-    grid-column: 1;
   }
 
   .primary-nav,
