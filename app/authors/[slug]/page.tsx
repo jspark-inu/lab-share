@@ -32,6 +32,9 @@ export default async function AuthorPage({
 }) {
   const author = await getAuthor(params.slug);
   if (!author) notFound();
-  const articles = await getArticlesByAuthor(params.slug);
-  return <AuthorPageView author={author} articles={articles} />;
+  const [articles, authors] = await Promise.all([
+    getArticlesByAuthor(params.slug),
+    getAuthors(),
+  ]);
+  return <AuthorPageView author={author} articles={articles} authors={authors} />;
 }

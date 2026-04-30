@@ -4,99 +4,72 @@ import type { RailNavKey } from "@/components/linear/LinearRail";
 
 export interface CategoryConfig {
   slug: CategorySlug;
-  /** 사이드바·탭에 표시되는 짧은 이름 ("News") */
+  /** 사이드바·탭에 표시되는 이름 ("News") */
   pageTitle: string;
-  /** 페이지 chrome 가운데 표시 ("◇ News") */
+  /** 페이지 chrome 가운데 표시 (글리프 + 이름) */
   chromeTitle: string;
-  /** 활성 탭 라벨 ("◇ All signals") */
-  activeTabLabel: string;
-  /** 활성 탭 외에 보일 탭들 (Projects/Notice/Tags 등) */
-  extraTabs: TabSpec[];
-  /** "＋ Add signal" 같은 우측 액션 라벨 */
+  /** 우측 액션 라벨 (보통 "＋ Submit idea") */
   primaryActionLabel: string;
-  /** quarter row 라벨 ("Signals", "Tooling", "Research Ops" 등) */
-  quarterLabel: string;
-  /** projects-table 의 aria-label */
-  ariaLabel: string;
-  /** rail 에서 active 표시할 nav 키들 (여러 개) */
+  /** 글 그룹 헤더 라벨 (예: "All articles") */
+  sectionLabel: string;
+  /** rail 에서 active 표시할 nav 키 — 카테고리 슬러그 그대로 */
   activeKeys: RailNavKey[];
+  /** 빈 상태 메시지 */
+  emptyMessage: string;
+  /** 한 줄 설명 — chrome 아래 작은 글씨 (선택) */
+  description?: string;
 }
 
 export const CATEGORY_CONFIG: Record<CategorySlug, CategoryConfig> = {
   news: {
     slug: "news",
     pageTitle: "News",
-    chromeTitle: "◇ News",
-    activeTabLabel: "◇ All signals",
-    extraTabs: [
-      { label: "Projects", href: "/" },
-      { label: "Notice", href: "/notice/" },
-      { label: "Tags", href: "/tags/", variant: "quiet" },
-    ],
-    primaryActionLabel: "＋ Add signal",
-    quarterLabel: "Signals",
-    ariaLabel: "News table",
-    activeKeys: ["pulse", "initiatives"],
+    chromeTitle: "↯ News",
+    primaryActionLabel: "＋ Submit idea",
+    sectionLabel: "All news",
+    activeKeys: ["news"],
+    emptyMessage: "아직 News 글이 없어요",
+    description: "학과·업계 시그널, 큰 흐름.",
   },
   "useful-github": {
     slug: "useful-github",
     pageTitle: "Useful GitHub",
-    chromeTitle: "◇ Useful GitHub",
-    activeTabLabel: "◇ All tools",
-    extraTabs: [
-      { label: "Lab Skills", href: "/lab-skills/" },
-      { label: "Workflows", href: "/external-skills/" },
-      { label: "Tags", href: "/tags/", variant: "quiet" },
-    ],
-    primaryActionLabel: "＋ Add tool",
-    quarterLabel: "Tooling",
-    ariaLabel: "Useful GitHub table",
-    activeKeys: ["tooling"],
+    chromeTitle: "◆ Useful GitHub",
+    primaryActionLabel: "＋ Submit repo",
+    sectionLabel: "All tools",
+    activeKeys: ["useful-github"],
+    emptyMessage: "추천할 repo가 아직 없어요",
+    description: "랩에서 실제로 써본 오픈소스.",
   },
   "lab-skills": {
     slug: "lab-skills",
     pageTitle: "Lab Skills",
     chromeTitle: "◇ Lab Skills",
-    activeTabLabel: "◇ All skills",
-    extraTabs: [
-      { label: "Tooling", href: "/useful-github/" },
-      { label: "Workflows", href: "/external-skills/" },
-      { label: "Tags", href: "/tags/", variant: "quiet" },
-    ],
     primaryActionLabel: "＋ Suggest skill",
-    quarterLabel: "Research Ops",
-    ariaLabel: "Lab skills table",
-    activeKeys: ["myissues", "research-ops"],
+    sectionLabel: "All skills",
+    activeKeys: ["lab-skills"],
+    emptyMessage: "Lab Skills 글이 아직 없어요",
+    description: "내부 노하우 — 환경 세팅·워크플로우·디버깅.",
   },
   "external-skills": {
     slug: "external-skills",
     pageTitle: "External Skills",
-    chromeTitle: "◇ External Skills",
-    activeTabLabel: "◇ All workflows",
-    extraTabs: [
-      { label: "Lab Skills", href: "/lab-skills/" },
-      { label: "Tooling", href: "/useful-github/" },
-      { label: "Tags", href: "/tags/", variant: "quiet" },
-    ],
-    primaryActionLabel: "＋ Suggest workflow",
-    quarterLabel: "Workflows",
-    ariaLabel: "External skills table",
-    activeKeys: ["workflows"],
+    chromeTitle: "▣ External Skills",
+    primaryActionLabel: "＋ Suggest tool",
+    sectionLabel: "All workflows",
+    activeKeys: ["external-skills"],
+    emptyMessage: "External Skills 글이 아직 없어요",
+    description: "외부 도구·서비스 활용 가이드.",
   },
   notice: {
     slug: "notice",
     pageTitle: "Notice",
-    chromeTitle: "◇ Notice",
-    activeTabLabel: "◇ All notices",
-    extraTabs: [
-      { label: "Projects", href: "/" },
-      { label: "Signals", href: "/news/" },
-      { label: "Tags", href: "/tags/", variant: "quiet" },
-    ],
-    primaryActionLabel: "＋ Create notice",
-    quarterLabel: "Inbox",
-    ariaLabel: "Notice table",
-    activeKeys: ["inbox", "more"],
+    chromeTitle: "⌂ Notice",
+    primaryActionLabel: "＋ Add notice",
+    sectionLabel: "All notices",
+    activeKeys: ["notice"],
+    emptyMessage: "공지가 아직 없어요",
+    description: "공지·안내·일정.",
   },
 };
 
@@ -107,3 +80,23 @@ export const CATEGORY_SLUGS: CategorySlug[] = [
   "external-skills",
   "notice",
 ];
+
+/**
+ * 카테고리 페이지에서 쓰는 공통 탭 구성:
+ *   현재 카테고리(strong + active) + 나머지 4 카테고리 + Tags
+ */
+export function categoryTabs(current: CategorySlug): TabSpec[] {
+  const tabs: TabSpec[] = [
+    {
+      label: CATEGORY_CONFIG[current].pageTitle,
+      href: `/${current}/`,
+      variant: "active",
+    },
+  ];
+  for (const slug of CATEGORY_SLUGS) {
+    if (slug === current) continue;
+    tabs.push({ label: CATEGORY_CONFIG[slug].pageTitle, href: `/${slug}/` });
+  }
+  tabs.push({ label: "Tags", href: "/tags/", variant: "quiet" });
+  return tabs;
+}

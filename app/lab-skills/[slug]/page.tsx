@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ArticleLayout } from "@/components/content/ArticleLayout";
-import { getArticle, getCategorySlugs } from "@/lib/content/loader";
+import { articleDescription, getArticle, getCategorySlugs } from "@/lib/content/loader";
 import { renderMarkdown } from "@/lib/content/renderer";
 
 const CATEGORY = "lab-skills" as const;
@@ -20,7 +20,7 @@ export async function generateMetadata({
   if (!article) return {};
   return {
     title: article.title,
-    description: article.display.meta,
+    description: articleDescription(article.body),
   };
 }
 

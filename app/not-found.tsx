@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function NotFound() {
   return (
-    <LinearShell activeKeys={["projects"]}>
+    <LinearShell activeKeys={["home"]}>
       <ProjectChrome title="◇ 404" />
       <article className="linear-article-page md-typeset">
         <div className="linear-article-body">

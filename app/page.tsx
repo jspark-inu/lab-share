@@ -2,130 +2,65 @@ import type { Metadata } from "next";
 import { LinearShell } from "@/components/linear/LinearShell";
 import { ProjectChrome } from "@/components/linear/ProjectChrome";
 import { ProjectTabs } from "@/components/linear/ProjectTabs";
-import { FilterRow } from "@/components/linear/FilterRow";
-import { TableHead, QuarterRow } from "@/components/linear/TableHead";
-import { ProjectRow } from "@/components/linear/ProjectRow";
+import { FilterableArticleTable } from "@/components/content/FilterableArticleTable";
+import { CategoryGrid } from "@/components/content/CategoryGrid";
+import {
+  getAllArticleSummaries,
+  getCategoryCounts,
+  getAuthors,
+} from "@/lib/content/loader";
 
 export const metadata: Metadata = {
-  title: "Projects",
+  title: "Home",
 };
 
+const HOME_RECENT_LIMIT = 12;
+
 /**
- * 홈 — Projects 뷰.
- * docs/index.md 의 Linear projects-table 1:1 React 포팅.
- * 디자인 회귀 테스트: extra.css 클래스명·구조 동일.
+ * 홈 — 진짜 랜딩.
+ *  1. Hero  (다시 만들지 말고, 공유하자)
+ *  2. Filter + Recent (실제 글, 최근 12개)
+ *  3. Category overview (5 카드, 글 수 표시)
  */
-export default function HomePage() {
+export default async function HomePage() {
+  const [allArticles, categoryCounts, authors] = await Promise.all([
+    getAllArticleSummaries(),
+    getCategoryCounts(),
+    getAuthors(),
+  ]);
+  const recent = allArticles.slice(0, HOME_RECENT_LIMIT);
+
   return (
-    <LinearShell activeKeys={["projects"]}>
-      <ProjectChrome title="◇ Projects" />
+    <LinearShell activeKeys={["home"]}>
+      <ProjectChrome title="HAI Lab Share" />
 
       <ProjectTabs
         tabs={[
-          { label: "Projects", href: "/", variant: "strong" },
-          { label: "◇ All projects", href: "/", variant: "active" },
-          { label: "Product Roadmap", href: "/news/" },
-          { label: "Roadmap Timeline", href: "/lab-skills/" },
-          { label: "8 more...", href: "/tags/", variant: "quiet" },
+          { label: "Home", href: "/", variant: "strong" },
+          { label: "Recent", href: "/", variant: "active" },
+          { label: "Tags", href: "/tags/" },
+          { label: "Author", href: "/authors/jspark-inu/", variant: "quiet" },
         ]}
-        primaryActionLabel="＋ Create project"
-        primaryActionHref="/notice/"
+        showDisplay={false}
       />
 
-      <FilterRow />
-
-      <section className="projects-table" aria-label="Lab project table">
-        <TableHead />
-
-        <QuarterRow label="Q2 2026" />
-
-        <ProjectRow
-          href="/notice/2026-04-27-lab-share-개시/"
-          dot="orange"
-          name="Lab Share launch"
-          health={{ label: "On track · 1mo" }}
-          priority="bars-high"
-          lead="JS"
-          date="Q2 2026"
-          status={{ value: "88%" }}
-        />
-
-        <QuarterRow label="Q3 2026" />
-
-        <ProjectRow
-          href="/lab-skills/"
-          dot="green"
-          name="Research skill library"
-          meta="Knowledge Base · 64%"
-          health={{ label: "On track · 3mo" }}
-          priority="bars"
-          lead="RO"
-          date="Q3 2026"
-          status={{ value: "64%", variant: "gold" }}
-        />
-
-        <ProjectRow
-          href="/useful-github/"
-          dot="cyan"
-          name="Tooling radar"
-          meta="GitHub resources · 35%"
-          health={{ label: "On track · 4mo" }}
-          priority="muted"
-          lead="GT"
-          date="Q3 2026"
-          status={{ value: "35%", variant: "blue" }}
-        />
-
-        <ProjectRow
-          href="/external-skills/"
-          dot="indigo"
-          name="Claude Code workflow set"
-          meta="Workflow Operations · 28%"
-          health={{ label: "No updates", variant: "muted" }}
-          priority="bars"
-          lead="WK"
-          date="Q3 2026"
-          status={{ value: "28%" }}
-        />
-
-        <ProjectRow
-          href="/news/"
-          dot="amber"
-          name="Department signal tracking"
-          meta="News & Trends · 0%"
-          health={{ label: "On track · 2mo" }}
-          priority="muted"
-          lead="NS"
-          date="Q3 2026"
-          status={{ value: "0%" }}
-        />
-
-        <QuarterRow label="Q4 2026" />
-
-        <ProjectRow
-          href="/notice/"
-          dot="red"
-          name="Member feedback verification"
-          meta="Giscus comments · blocked"
-          health={{ label: "At risk · account check", variant: "atrisk" }}
-          priority="bars-high"
-          lead="FB"
-          date="Q4 2026"
-          status={{ value: "12%", variant: "gold" }}
-        />
-
-        <ProjectRow
-          href="/notice/"
-          dot="pink"
-          name="Internal access layer"
-          meta="Cloudflare Access · planned"
-          health={{ label: "No updates", variant: "muted" }}
-          priority="bars"
-          lead="SEC"
-          date="Q4 2026"
-          status={{ value: "0%" }}
-        />
+      <section className="lab-hero" aria-label="Welcome">
+        <h1>다시 만들지 말고, <strong>공유하자</strong>.</h1>
+        <p>
+          인천대 HAI 연구실 내부 지식 공유 허브.
+          AI가 큐레이션·작성한 글에 학부생이 댓글로 반응하며 배웁니다.
+          모바일에서 한 곳에 모아 보세요.
+        </p>
       </section>
+
+      <FilterableArticleTable
+        articles={recent}
+        authors={authors}
+        sectionLabel={`Recent · 최근 ${recent.length}개`}
+        emptyMessage="아직 작성된 글이 없어요"
+      />
+
+      <CategoryGrid counts={categoryCounts} />
     </LinearShell>
   );
 }

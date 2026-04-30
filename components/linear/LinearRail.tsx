@@ -1,43 +1,59 @@
 import Link from "next/link";
+import { CATEGORY_SLUGS } from "@/lib/content/categories";
+import type { CategorySlug } from "@/lib/content/types";
 
+/**
+ * Rail 활성 키 — 실제 사이트 구조에 1:1 대응.
+ *  - "home"   : 랜딩 ("/")
+ *  - 5 카테고리 슬러그
+ *  - "tags" / "authors"  : 메타 뷰
+ *  - "search" : 검색
+ */
 export type RailNavKey =
-  // Primary nav (top section)
-  | "inbox"
-  | "myissues"
-  | "pulse"
-  // Workspace block
-  | "initiatives"
-  | "projects"
-  | "views"
-  | "teams"
-  | "more"
-  // Your teams chips
-  | "research-ops"
-  | "tooling"
-  | "workflows";
+  | "home"
+  | CategorySlug
+  | "tags"
+  | "authors"
+  | "search";
 
 interface LinearRailProps {
-  /**
-   * 활성 표시할 nav 키들. 페이지마다 여러 항목이 동시 active일 수 있음
-   * (예: news = ["pulse", "initiatives"]).
-   */
+  /** 활성 표시할 nav 키들. 보통 페이지당 1개 */
   activeKeys?: RailNavKey[];
-  /** Inbox badge count (default 3) */
-  inboxBadge?: number;
-  /** Pulse badge count (default 1) */
-  pulseBadge?: number;
+  /** 카테고리별 글 수 — getCategoryCounts() 결과를 그대로 넘긴다 */
+  categoryCounts?: Partial<Record<CategorySlug, number>>;
 }
+
+const CATEGORY_LABEL: Record<CategorySlug, string> = {
+  news: "News",
+  "useful-github": "Useful GitHub",
+  "lab-skills": "Lab Skills",
+  "external-skills": "External Skills",
+  notice: "Notice",
+};
+
+const CATEGORY_GLYPH: Record<CategorySlug, string> = {
+  news: "↯",
+  "useful-github": "◆",
+  "lab-skills": "◇",
+  "external-skills": "▣",
+  notice: "⌂",
+};
 
 /**
  * 좌측 사이드바 — 모든 페이지 공통.
- * 디자인 시스템 SSOT: docs/stylesheets/extra.css 의 .linear-rail 외 클래스 1:1 포팅.
+ *
+ * 정보 구조:
+ *   1. Home (Recent 뷰)
+ *   2. Categories (5개 — News/Useful GitHub/Lab Skills/External Skills/Notice)
+ *   3. Browse (Tags, Authors)
+ *
+ * 디자인 토큰 SSOT: styles/globals.css (.linear-rail, .primary-nav, .nav-block, ...)
  */
 export function LinearRail({
   activeKeys = [],
-  inboxBadge = 3,
-  pulseBadge = 1,
+  categoryCounts = {},
 }: LinearRailProps) {
-  const set = new Set(activeKeys);
+  const set = new Set<RailNavKey>(activeKeys);
   const cls = (key: RailNavKey) => (set.has(key) ? "active" : undefined);
 
   return (
@@ -48,55 +64,44 @@ export function LinearRail({
         <span></span>
       </div>
 
-      <div className="workspace-switcher">
+      <Link href="/" className="workspace-switcher" aria-label="Lab Share home">
         <div className="workspace-logo">H</div>
-        <strong>HAI Lab</strong>
+        <strong>HAI Lab Share</strong>
         <span>⌄</span>
-      </div>
+      </Link>
 
       <nav className="primary-nav" aria-label="Workspace navigation">
-        <Link href="/notice/" className={cls("inbox")}>
-          <span className="nav-glyph">⌂</span>Inbox{" "}
-          {inboxBadge > 0 ? <em>{inboxBadge}</em> : null}
-        </Link>
-        <Link href="/lab-skills/" className={cls("myissues")}>
-          <span className="nav-glyph">◌</span>My issues
-        </Link>
-        <Link href="/news/" className={cls("pulse")}>
-          <span className="nav-glyph">↯</span>Pulse{" "}
-          {pulseBadge > 0 ? <em>{pulseBadge}</em> : null}
+        <Link href="/" className={cls("home")}>
+          <span className="nav-glyph">⌂</span>Home
         </Link>
       </nav>
 
       <div className="nav-block">
-        <p>Workspace</p>
-        <Link href="/news/" className={cls("initiatives")}>
-          <span className="nav-glyph">⌃</span>Initiatives
-        </Link>
-        <Link href="/" className={cls("projects")}>
-          <span className="nav-glyph">◇</span>Projects
-        </Link>
-        <Link href="/tags/" className={cls("views")}>
-          <span className="nav-glyph">▱</span>Views
-        </Link>
-        <Link href="/authors/jspark-inu/" className={cls("teams")}>
-          <span className="nav-glyph">▣</span>Teams
-        </Link>
-        <Link href="/notice/" className={cls("more")}>
-          <span className="nav-glyph">⋯</span>More
-        </Link>
+        <p>Categories</p>
+        {CATEGORY_SLUGS.map((slug) => {
+          const count = categoryCounts[slug] ?? 0;
+          return (
+            <Link
+              key={slug}
+              href={`/${slug}/`}
+              className={cls(slug)}
+              aria-label={`${CATEGORY_LABEL[slug]} (${count}개 글)`}
+            >
+              <span className="nav-glyph">{CATEGORY_GLYPH[slug]}</span>
+              {CATEGORY_LABEL[slug]}
+              {count > 0 ? <em>{count}</em> : null}
+            </Link>
+          );
+        })}
       </div>
 
       <div className="nav-block">
-        <p>Your teams</p>
-        <Link href="/lab-skills/" className={cls("research-ops")}>
-          <span className="team-chip blue">R</span>Research ops <b>›</b>
+        <p>Browse</p>
+        <Link href="/tags/" className={cls("tags")}>
+          <span className="nav-glyph">▱</span>Tags
         </Link>
-        <Link href="/useful-github/" className={cls("tooling")}>
-          <span className="team-chip purple">T</span>Tooling <b>›</b>
-        </Link>
-        <Link href="/external-skills/" className={cls("workflows")}>
-          <span className="team-chip mint">W</span>Workflows <b>›</b>
+        <Link href="/authors/jspark-inu/" className={cls("authors")}>
+          <span className="team-chip blue">A</span>Authors <b>›</b>
         </Link>
       </div>
     </aside>
