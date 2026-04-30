@@ -1,10 +1,10 @@
 import { LinearRail, type RailNavKey } from "./LinearRail";
 
 interface LinearShellProps {
-  /** 활성 표시할 rail nav 키들 (여러 개 동시 가능) */
+  /** 활성 표시할 rail nav 키 (보통 1개) */
   activeKeys?: RailNavKey[];
-  inboxBadge?: number;
-  pulseBadge?: number;
+  recentBadge?: number;
+  updatesBadge?: number;
   children: React.ReactNode;
 }
 
@@ -15,16 +15,16 @@ interface LinearShellProps {
  */
 export function LinearShell({
   activeKeys,
-  inboxBadge,
-  pulseBadge,
+  recentBadge,
+  updatesBadge,
   children,
 }: LinearShellProps) {
   return (
     <section className="linear-app">
       <LinearRail
         activeKeys={activeKeys}
-        inboxBadge={inboxBadge}
-        pulseBadge={pulseBadge}
+        recentBadge={recentBadge}
+        updatesBadge={updatesBadge}
       />
       <main className="project-surface">{children}</main>
     </section>

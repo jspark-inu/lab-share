@@ -1,41 +1,48 @@
 import Link from "next/link";
 
+/**
+ * Lab Ops Hub 사이드바 — 정직 라벨.
+ * 디자인 SSOT(.linear-rail / .primary-nav / .nav-block / .nav-glyph / .team-chip 등)는 변경 0.
+ * 라벨 텍스트와 href 만 실제 사이트 구조와 1:1 매핑.
+ *
+ * 11개 슬롯:
+ *   Primary nav (3): Home / Recent / Updates
+ *   Workspace block (5): Projects / Meetings / Skills / Wiki / Notice
+ *   Your teams block (3): 김도현 / 이혜진 / 박경 (학생 칩 — Phase 2 학생 페이지 예약)
+ */
 export type RailNavKey =
-  // Primary nav (top section)
-  | "inbox"
-  | "myissues"
-  | "pulse"
+  // Primary nav
+  | "home"
+  | "recent"
+  | "updates"
   // Workspace block
-  | "initiatives"
   | "projects"
-  | "views"
-  | "teams"
-  | "more"
+  | "meetings"
+  | "skills"
+  | "wiki"
+  | "notice"
   // Your teams chips
-  | "research-ops"
-  | "tooling"
-  | "workflows";
+  | "student-do"
+  | "student-hye"
+  | "student-gyung";
 
 interface LinearRailProps {
-  /**
-   * 활성 표시할 nav 키들. 페이지마다 여러 항목이 동시 active일 수 있음
-   * (예: news = ["pulse", "initiatives"]).
-   */
+  /** 활성 표시할 nav 키들 (보통 1개) */
   activeKeys?: RailNavKey[];
-  /** Inbox badge count (default 3) */
-  inboxBadge?: number;
-  /** Pulse badge count (default 1) */
-  pulseBadge?: number;
+  /** Recent badge count (default 0 = 미표시) */
+  recentBadge?: number;
+  /** Updates badge count (default 0) */
+  updatesBadge?: number;
 }
 
 /**
  * 좌측 사이드바 — 모든 페이지 공통.
- * 디자인 시스템 SSOT: docs/stylesheets/extra.css 의 .linear-rail 외 클래스 1:1 포팅.
+ * 디자인 시스템 SSOT: styles/globals.css 의 .linear-rail 외 클래스 그대로.
  */
 export function LinearRail({
   activeKeys = [],
-  inboxBadge = 3,
-  pulseBadge = 1,
+  recentBadge = 0,
+  updatesBadge = 0,
 }: LinearRailProps) {
   const set = new Set(activeKeys);
   const cls = (key: RailNavKey) => (set.has(key) ? "active" : undefined);
@@ -48,55 +55,54 @@ export function LinearRail({
         <span></span>
       </div>
 
-      <div className="workspace-switcher">
+      <Link href="/" className="workspace-switcher" aria-label="HAI Lab Ops Hub">
         <div className="workspace-logo">H</div>
         <strong>HAI Lab</strong>
         <span>⌄</span>
-      </div>
+      </Link>
 
       <nav className="primary-nav" aria-label="Workspace navigation">
-        <Link href="/notice/" className={cls("inbox")}>
-          <span className="nav-glyph">⌂</span>Inbox{" "}
-          {inboxBadge > 0 ? <em>{inboxBadge}</em> : null}
+        <Link href="/" className={cls("home")}>
+          <span className="nav-glyph">⌂</span>Home
         </Link>
-        <Link href="/lab-skills/" className={cls("myissues")}>
-          <span className="nav-glyph">◌</span>My issues
+        <Link href="/projects/" className={cls("recent")}>
+          <span className="nav-glyph">◌</span>Recent
         </Link>
-        <Link href="/news/" className={cls("pulse")}>
-          <span className="nav-glyph">↯</span>Pulse{" "}
-          {pulseBadge > 0 ? <em>{pulseBadge}</em> : null}
+        <Link href="/meetings/" className={cls("updates")}>
+          <span className="nav-glyph">↯</span>Updates{" "}
+          {updatesBadge > 0 ? <em>{updatesBadge}</em> : null}
         </Link>
       </nav>
 
       <div className="nav-block">
         <p>Workspace</p>
-        <Link href="/notice/" className={cls("initiatives")}>
-          <span className="nav-glyph">⌃</span>Initiatives
+        <Link href="/projects/" className={cls("projects")}>
+          <span className="nav-glyph">⌃</span>Projects
         </Link>
-        <Link href="/" className={cls("projects")}>
-          <span className="nav-glyph">◇</span>Projects
+        <Link href="/meetings/" className={cls("meetings")}>
+          <span className="nav-glyph">◇</span>Meetings
         </Link>
-        <Link href="/tags/" className={cls("views")}>
-          <span className="nav-glyph">▱</span>Views
+        <Link href="/skills/" className={cls("skills")}>
+          <span className="nav-glyph">▱</span>Skills
         </Link>
-        <Link href="/authors/jspark-inu/" className={cls("teams")}>
-          <span className="nav-glyph">▣</span>Teams
+        <Link href="/wiki/" className={cls("wiki")}>
+          <span className="nav-glyph">▣</span>Wiki
         </Link>
-        <Link href="/tags/" className={cls("more")}>
-          <span className="nav-glyph">⋯</span>More
+        <Link href="/notice/" className={cls("notice")}>
+          <span className="nav-glyph">⋯</span>Notice
         </Link>
       </div>
 
       <div className="nav-block">
-        <p>Your teams</p>
-        <Link href="/lab-skills/" className={cls("research-ops")}>
-          <span className="team-chip blue">R</span>Research ops <b>›</b>
+        <p>Your team</p>
+        <Link href="/projects/" className={cls("student-do")}>
+          <span className="team-chip blue">도</span>김도현 <b>›</b>
         </Link>
-        <Link href="/useful-github/" className={cls("tooling")}>
-          <span className="team-chip purple">T</span>Tooling <b>›</b>
+        <Link href="/projects/" className={cls("student-hye")}>
+          <span className="team-chip purple">혜</span>이혜진 <b>›</b>
         </Link>
-        <Link href="/external-skills/" className={cls("workflows")}>
-          <span className="team-chip mint">W</span>Workflows <b>›</b>
+        <Link href="/projects/" className={cls("student-gyung")}>
+          <span className="team-chip mint">경</span>박경 <b>›</b>
         </Link>
       </div>
     </aside>

@@ -4,22 +4,22 @@ date: 2026-04-27
 authors:
   - jspark-inu
 tags:
-  - github
   - agent
   - claude
+  - sdk
 display:
   dot: cyan
-  meta: agent SDK · tool-use loop
+  meta: 에이전트 SDK · 첫 시작점
   health:
-    label: On track · useful
+    label: 사용 중
   priority: bars
-  lead: GT
-  date: Q2 2026
+  lead: JS
+  date: Apr 27
   status:
     value: 100%
     variant: blue
   authorPageDate: Apr 27
-  authorPageMeta: Useful GitHub
+  authorPageMeta: Skill
 ---
 
 # Claude Agent SDK — 에이전트 만들기 시작점

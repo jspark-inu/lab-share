@@ -4,84 +4,88 @@ import type { RailNavKey } from "@/components/linear/LinearRail";
 
 export interface CategoryConfig {
   slug: CategorySlug;
-  /** 사이드바·탭에 표시되는 짧은 이름 ("News") */
+  /** 사이드바·탭에 표시되는 짧은 이름 ("Projects") */
   pageTitle: string;
-  /** 페이지 chrome 가운데 표시 ("◇ News") */
+  /** 페이지 chrome 가운데 표시 ("◇ Projects") */
   chromeTitle: string;
-  /** 활성 탭 라벨 ("◇ All signals") */
+  /** 활성 탭 라벨 ("◇ All projects") */
   activeTabLabel: string;
-  /** 활성 탭 외에 보일 탭들 (Projects/Notice/Tags 등) */
+  /** 활성 탭 외에 보일 탭들 */
   extraTabs: TabSpec[];
-  /** "＋ Add signal" 같은 우측 액션 라벨 */
+  /** 우측 액션 라벨 ("＋ Create project" 등) */
   primaryActionLabel: string;
-  /** quarter row 라벨 ("Signals", "Tooling", "Research Ops" 등) */
+  /** quarter row 라벨 ("Q3 2026", "Skills", "Wiki" 등) */
   quarterLabel: string;
   /** projects-table 의 aria-label */
   ariaLabel: string;
-  /** rail 에서 active 표시할 nav 키들 (여러 개) */
+  /** rail 에서 active 표시할 nav 키들 */
   activeKeys: RailNavKey[];
 }
 
 export const CATEGORY_CONFIG: Record<CategorySlug, CategoryConfig> = {
-  news: {
-    slug: "news",
-    pageTitle: "News",
-    chromeTitle: "◇ News",
-    activeTabLabel: "◇ All signals",
+  projects: {
+    slug: "projects",
+    pageTitle: "Projects",
+    chromeTitle: "◇ Projects",
+    activeTabLabel: "◇ All projects",
     extraTabs: [
-      { label: "Projects", href: "/" },
-      { label: "Notice", href: "/notice/" },
-      { label: "Tags", href: "/tags/", variant: "quiet" },
+      { label: "Meetings", href: "/meetings/" },
+      { label: "Skills", href: "/skills/" },
+      { label: "Wiki", href: "/wiki/" },
+      { label: "Notice", href: "/notice/", variant: "quiet" },
     ],
-    primaryActionLabel: "＋ Add signal",
-    quarterLabel: "Signals",
-    ariaLabel: "News table",
-    activeKeys: ["pulse", "initiatives"],
+    primaryActionLabel: "＋ Track project",
+    quarterLabel: "Active",
+    ariaLabel: "Projects table",
+    activeKeys: ["projects"],
   },
-  "useful-github": {
-    slug: "useful-github",
-    pageTitle: "Useful GitHub",
-    chromeTitle: "◇ Useful GitHub",
-    activeTabLabel: "◇ All tools",
+  meetings: {
+    slug: "meetings",
+    pageTitle: "Meetings",
+    chromeTitle: "◇ Meetings",
+    activeTabLabel: "◇ All meetings",
     extraTabs: [
-      { label: "Lab Skills", href: "/lab-skills/" },
-      { label: "Workflows", href: "/external-skills/" },
-      { label: "Tags", href: "/tags/", variant: "quiet" },
+      { label: "Projects", href: "/projects/" },
+      { label: "Skills", href: "/skills/" },
+      { label: "Wiki", href: "/wiki/" },
+      { label: "Notice", href: "/notice/", variant: "quiet" },
     ],
-    primaryActionLabel: "＋ Add tool",
-    quarterLabel: "Tooling",
-    ariaLabel: "Useful GitHub table",
-    activeKeys: ["tooling"],
+    primaryActionLabel: "＋ Add meeting",
+    quarterLabel: "Recent",
+    ariaLabel: "Meetings table",
+    activeKeys: ["meetings"],
   },
-  "lab-skills": {
-    slug: "lab-skills",
-    pageTitle: "Lab Skills",
-    chromeTitle: "◇ Lab Skills",
+  skills: {
+    slug: "skills",
+    pageTitle: "Skills",
+    chromeTitle: "◇ Skills",
     activeTabLabel: "◇ All skills",
     extraTabs: [
-      { label: "Tooling", href: "/useful-github/" },
-      { label: "Workflows", href: "/external-skills/" },
-      { label: "Tags", href: "/tags/", variant: "quiet" },
+      { label: "Projects", href: "/projects/" },
+      { label: "Meetings", href: "/meetings/" },
+      { label: "Wiki", href: "/wiki/" },
+      { label: "Notice", href: "/notice/", variant: "quiet" },
     ],
-    primaryActionLabel: "＋ Suggest skill",
-    quarterLabel: "Research Ops",
-    ariaLabel: "Lab skills table",
-    activeKeys: ["myissues", "research-ops"],
+    primaryActionLabel: "＋ Share skill",
+    quarterLabel: "Shared",
+    ariaLabel: "Skills table",
+    activeKeys: ["skills"],
   },
-  "external-skills": {
-    slug: "external-skills",
-    pageTitle: "External Skills",
-    chromeTitle: "◇ External Skills",
-    activeTabLabel: "◇ All workflows",
+  wiki: {
+    slug: "wiki",
+    pageTitle: "Wiki",
+    chromeTitle: "◇ Wiki",
+    activeTabLabel: "◇ All entries",
     extraTabs: [
-      { label: "Lab Skills", href: "/lab-skills/" },
-      { label: "Tooling", href: "/useful-github/" },
-      { label: "Tags", href: "/tags/", variant: "quiet" },
+      { label: "Projects", href: "/projects/" },
+      { label: "Meetings", href: "/meetings/" },
+      { label: "Skills", href: "/skills/" },
+      { label: "Notice", href: "/notice/", variant: "quiet" },
     ],
-    primaryActionLabel: "＋ Suggest workflow",
-    quarterLabel: "Workflows",
-    ariaLabel: "External skills table",
-    activeKeys: ["workflows"],
+    primaryActionLabel: "＋ New entry",
+    quarterLabel: "Knowledge",
+    ariaLabel: "Wiki table",
+    activeKeys: ["wiki"],
   },
   notice: {
     slug: "notice",
@@ -89,21 +93,22 @@ export const CATEGORY_CONFIG: Record<CategorySlug, CategoryConfig> = {
     chromeTitle: "◇ Notice",
     activeTabLabel: "◇ All notices",
     extraTabs: [
-      { label: "Projects", href: "/" },
-      { label: "Signals", href: "/news/" },
-      { label: "Tags", href: "/tags/", variant: "quiet" },
+      { label: "Projects", href: "/projects/" },
+      { label: "Meetings", href: "/meetings/" },
+      { label: "Skills", href: "/skills/" },
+      { label: "Wiki", href: "/wiki/", variant: "quiet" },
     ],
     primaryActionLabel: "＋ Create notice",
-    quarterLabel: "Inbox",
+    quarterLabel: "Active",
     ariaLabel: "Notice table",
-    activeKeys: ["inbox", "more"],
+    activeKeys: ["notice"],
   },
 };
 
 export const CATEGORY_SLUGS: CategorySlug[] = [
-  "news",
-  "useful-github",
-  "lab-skills",
-  "external-skills",
+  "projects",
+  "meetings",
+  "skills",
+  "wiki",
   "notice",
 ];

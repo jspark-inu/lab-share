@@ -1,11 +1,34 @@
-import { ProjectRow, type ProjectRowProps } from "@/components/linear/ProjectRow";
+import {
+  ProjectRow,
+  type ProjectRowProps,
+  type DotColor,
+  type HealthVariant,
+  type PriorityVariant,
+  type StatusVariant,
+} from "@/components/linear/ProjectRow";
 import type { ArticleSummary } from "@/lib/content/types";
+
+/**
+ * frontmatter `display:` 블록의 expected shape — types.ts 에선 unknown 으로
+ * 받지만 row 매핑 시점에 narrow.
+ */
+interface ArticleDisplay {
+  dot: DotColor;
+  meta?: string;
+  health: { label: string; variant?: HealthVariant };
+  priority: PriorityVariant;
+  lead: string;
+  date: string;
+  status: { value: string; variant?: StatusVariant };
+  authorPageDate?: string;
+  authorPageMeta?: string;
+}
 
 interface Props {
   article: ArticleSummary;
   /** 작성자 페이지에선 dot/meta 가 다름 → override 가능 */
   override?: {
-    dot?: ArticleSummary["display"]["dot"];
+    dot?: DotColor;
     meta?: string;
     date?: string;
     leadOverride?: string;
@@ -23,14 +46,14 @@ export function articleToProjectRowProps({
   override,
   useAuthorPageMode = false,
 }: Props): ProjectRowProps {
-  const d = article.display;
-  const dot = override?.dot ?? d.dot;
+  const d = (article.display ?? {}) as Partial<ArticleDisplay>;
+  const dot: DotColor = override?.dot ?? d.dot ?? "cyan";
   const meta = useAuthorPageMode
     ? (override?.meta ?? d.authorPageMeta ?? d.meta)
     : (override?.meta ?? d.meta);
   const date = useAuthorPageMode
-    ? (override?.date ?? d.authorPageDate ?? d.date)
-    : (override?.date ?? d.date);
+    ? (override?.date ?? d.authorPageDate ?? d.date ?? "")
+    : (override?.date ?? d.date ?? "");
 
   return {
     href: article.href,
@@ -39,18 +62,15 @@ export function articleToProjectRowProps({
     meta,
     health: useAuthorPageMode
       ? { label: "Published" }
-      : { label: d.health.label, variant: d.health.variant },
-    priority: d.priority,
-    lead: override?.leadOverride ?? d.lead,
+      : { label: d.health?.label ?? "—", variant: d.health?.variant },
+    priority: d.priority ?? "muted",
+    lead: override?.leadOverride ?? d.lead ?? "?",
     date,
-    status: { value: d.status.value, variant: d.status.variant },
+    status: { value: d.status?.value ?? "—", variant: d.status?.variant },
   };
 }
 
-/**
- * ArticleSummary 의 display 메타 → Linear ProjectRow 1 행 렌더.
- * (정렬 OFF 분기 그룹 페이지가 직접 호출하는 path 가 더 있을 수 있어 유지)
- */
+/** ArticleSummary 의 display 메타 → Linear ProjectRow 1 행 렌더. */
 export function ArticleProjectRow(props: Props) {
   return <ProjectRow {...articleToProjectRowProps(props)} />;
 }

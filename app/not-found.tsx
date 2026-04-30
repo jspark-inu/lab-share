@@ -23,10 +23,10 @@ export default function NotFound() {
               <Link href="/">홈으로</Link>
             </li>
             <li>
-              <Link href="/news/">News</Link> ·{" "}
-              <Link href="/useful-github/">Useful GitHub</Link> ·{" "}
-              <Link href="/lab-skills/">Lab Skills</Link> ·{" "}
-              <Link href="/external-skills/">External Skills</Link> ·{" "}
+              <Link href="/projects/">Projects</Link> ·{" "}
+              <Link href="/meetings/">Meetings</Link> ·{" "}
+              <Link href="/skills/">Skills</Link> ·{" "}
+              <Link href="/wiki/">Wiki</Link> ·{" "}
               <Link href="/notice/">Notice</Link>
             </li>
             <li>

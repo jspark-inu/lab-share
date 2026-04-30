@@ -12,8 +12,7 @@ interface Props {
 }
 
 /**
- * 작성자 페이지 — Linear "Teams" UI.
- * 현 docs/authors/jspark-inu.md 를 1:1 재현하되, 글 목록은 동적으로.
+ * 작성자 페이지 — author 의 published items.
  * 정렬은 SortableProjectsTable 에서 처리 — 디자인 변경 0.
  */
 export function AuthorPageView({ author, articles }: Props) {
@@ -26,8 +25,8 @@ export function AuthorPageView({ author, articles }: Props) {
   );
 
   return (
-    <LinearShell activeKeys={["teams"]}>
-      <ProjectChrome title="◇ Team" />
+    <LinearShell activeKeys={[]}>
+      <ProjectChrome title={`◇ ${author.name}`} />
       <ProjectTabs
         tabs={[
           { label: author.name, href: `/authors/${author.id}/`, variant: "strong" },
@@ -36,12 +35,12 @@ export function AuthorPageView({ author, articles }: Props) {
             href: `/authors/${author.id}/`,
             variant: "active",
           },
-          { label: "Projects", href: "/" },
-          { label: "Views", href: "/tags/" },
+          { label: "Home", href: "/" },
+          { label: "Projects", href: "/projects/" },
+          { label: "Tags", href: "/tags/" },
           { label: "GitHub", href: `https://github.com/${author.id}`, variant: "quiet" },
         ]}
-        primaryActionLabel="＋ Assign item"
-        primaryActionHref="/notice/"
+        showDisplay={false}
       />
       <FilterRow />
       <SortableProjectsTable

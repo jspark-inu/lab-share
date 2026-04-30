@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ArticleLayout } from "@/components/content/ArticleLayout";
-import { getArticle, getCategorySlugs } from "@/lib/content/loader";
+import { articleDescription, getArticle, getCategorySlugs } from "@/lib/content/loader";
 import { renderMarkdown } from "@/lib/content/renderer";
 
-const CATEGORY = "external-skills" as const;
+const CATEGORY = "meetings" as const;
 
 export async function generateStaticParams() {
   const slugs = await getCategorySlugs(CATEGORY);
@@ -20,11 +20,11 @@ export async function generateMetadata({
   if (!article) return {};
   return {
     title: article.title,
-    description: article.display.meta,
+    description: articleDescription(article.body),
   };
 }
 
-export default async function ExternalSkillsArticlePage({
+export default async function MeetingArticlePage({
   params,
 }: {
   params: { slug: string };

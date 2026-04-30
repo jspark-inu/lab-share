@@ -4,71 +4,65 @@ import { ProjectTabs } from "@/components/linear/ProjectTabs";
 import { FilterRow } from "@/components/linear/FilterRow";
 import { SortableProjectsTable } from "@/components/linear/SortableProjectsTable";
 import type { ProjectRowProps } from "@/components/linear/ProjectRow";
-import type { ArticleSummary } from "@/lib/content/types";
+import type { DotColor, CategorySlug } from "@/lib/content/types";
+import type { TagBucket } from "@/lib/content/loader";
 
 interface Props {
-  articles: ArticleSummary[];
+  buckets: TagBucket[];
 }
 
-/**
- * Tags 페이지 — Linear "Views" UI.
- * 현 docs/tags.md 를 정확히 1:1 재현 (큐레이션 3개 view).
- * 정렬은 SortableProjectsTable 에서 처리 — 디자인 변경 0.
- */
-const TAG_ROWS: ProjectRowProps[] = [
-  {
-    href: "/news/",
-    dot: "amber",
-    name: "학과 / 개편 / AI",
-    meta: "department transition signals",
-    health: { label: "On track · active" },
-    priority: "muted",
-    lead: "NS",
-    date: "Q2 2026",
-    status: { value: "3" },
-  },
-  {
-    href: "/useful-github/",
-    dot: "cyan",
-    name: "github / agent / claude",
-    meta: "agent tooling resources",
-    health: { label: "On track · active" },
-    priority: "bars",
-    lead: "GT",
-    date: "Q2 2026",
-    status: { value: "3", variant: "blue" },
-  },
-  {
-    href: "/lab-skills/",
-    dot: "green",
-    name: "abm / simulation / environment",
-    meta: "research experiment setup",
-    health: { label: "On track · active" },
-    priority: "bars",
-    lead: "RO",
-    date: "Q2 2026",
-    status: { value: "3", variant: "gold" },
-  },
-];
+const CATEGORY_DOT: Record<CategorySlug, DotColor> = {
+  projects: "orange",
+  meetings: "amber",
+  skills: "cyan",
+  wiki: "green",
+  notice: "indigo",
+};
 
-export function TagsView({ articles: _articles }: Props) {
+const CATEGORY_LABEL: Record<CategorySlug, string> = {
+  projects: "Projects",
+  meetings: "Meetings",
+  skills: "Skills",
+  wiki: "Wiki",
+  notice: "Notice",
+};
+
+/**
+ * Tags 페이지 — 실제 frontmatter 에서 태그 자동 집계.
+ * 디자인 SSOT(.projects-table 6컬럼) 변경 0.
+ * 각 row 클릭 시: 그 태그를 가진 가장 최신 글로 직행.
+ */
+export function TagsView({ buckets }: Props) {
+  const rows: ProjectRowProps[] = buckets.map((b) => ({
+    href: b.href,
+    dot: CATEGORY_DOT[b.category],
+    name: `#${b.tag}`,
+    meta: `${CATEGORY_LABEL[b.category]} · ${b.count}개 글`,
+    health: { label: b.count >= 2 ? "활성" : "단일" },
+    priority: b.count >= 3 ? "bars-high" : b.count >= 2 ? "bars" : "muted",
+    lead: "JS",
+    date: "—",
+    status: { value: String(b.count), variant: b.count >= 2 ? "blue" : "default" },
+  }));
+
   return (
-    <LinearShell activeKeys={["views"]}>
-      <ProjectChrome title="◇ Views" />
+    <LinearShell activeKeys={[]}>
+      <ProjectChrome title="◇ Tags" />
       <ProjectTabs
         tabs={[
           { label: "Tags", href: "/tags/", variant: "strong" },
-          { label: "◇ All views", href: "/tags/", variant: "active" },
-          { label: "Projects", href: "/" },
-          { label: "Signals", href: "/news/" },
-          { label: "Authors", href: "/authors/jspark-inu/", variant: "quiet" },
+          { label: "◇ All tags", href: "/tags/", variant: "active" },
+          { label: "Projects", href: "/projects/" },
+          { label: "Meetings", href: "/meetings/" },
+          { label: "Skills", href: "/skills/" },
+          { label: "Wiki", href: "/wiki/" },
+          { label: "Notice", href: "/notice/", variant: "quiet" },
         ]}
-        primaryActionLabel="＋ Create view"
-        primaryActionHref="/notice/"
+        showDisplay={false}
       />
       <FilterRow />
       <SortableProjectsTable
-        groups={[{ label: "Views", rows: TAG_ROWS }]}
+        groups={[{ label: "Tags", rows }]}
         ariaLabel="Tags table"
       />
     </LinearShell>

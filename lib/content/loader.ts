@@ -78,6 +78,57 @@ export async function getArticleSummariesByCategory(
   return articles.map(({ body: _body, ...summary }) => summary);
 }
 
+/** OG/메타 description — body 의 첫 의미있는 한 문단을 짧게 자른다. */
+export function articleDescription(body: string, maxLen = 140): string {
+  const stripped = body
+    .replace(/^---[\s\S]*?---/, "")
+    .replace(/^#.*$/gm, "")
+    .replace(/^>.*$/gm, "")
+    .replace(/\!\[[^\]]*\]\([^)]+\)/g, "")
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
+    .replace(/[*_`]/g, "")
+    .trim();
+  const firstParagraph = stripped.split(/\n\s*\n/)[0]?.replace(/\s+/g, " ").trim() ?? "";
+  if (firstParagraph.length <= maxLen) return firstParagraph;
+  return firstParagraph.slice(0, maxLen - 1).trimEnd() + "…";
+}
+
+/** 모든 글에서 태그 집계 — Tags 페이지에서 쓴다 */
+export interface TagBucket {
+  tag: string;
+  count: number;
+  /** 그 태그를 가진 글 중 가장 최신 글의 href (row 클릭 시 직행) */
+  href: string;
+  /** 그 글의 카테고리 (dot 색 결정) */
+  category: CategorySlug;
+}
+
+export async function getTagBuckets(): Promise<TagBucket[]> {
+  const all = await getAllArticleSummaries();
+  const buckets = new Map<string, { count: number; latest: ArticleSummary }>();
+  for (const a of all) {
+    for (const raw of a.tags ?? []) {
+      // YAML 이 1E2/1A7 같은 값을 숫자로 파싱할 수 있음 → 문자열 강제.
+      const t = String(raw);
+      const cur = buckets.get(t);
+      if (!cur) {
+        buckets.set(t, { count: 1, latest: a });
+      } else {
+        cur.count += 1;
+        if (a.date.localeCompare(cur.latest.date) > 0) cur.latest = a;
+      }
+    }
+  }
+  return [...buckets.entries()]
+    .map(([tag, v]) => ({
+      tag,
+      count: v.count,
+      href: v.latest.href,
+      category: v.latest.category,
+    }))
+    .sort((a, b) => (b.count - a.count) || a.tag.localeCompare(b.tag));
+}
+
 /** 모든 카테고리의 모든 article 합본 (summary, 최신순) */
 export async function getAllArticleSummaries(): Promise<ArticleSummary[]> {
   const all = await Promise.all(

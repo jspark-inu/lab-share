@@ -9,17 +9,17 @@ tags:
   - 도구
 display:
   dot: indigo
-  meta: note · debug · verify · document
+  meta: 코드베이스 탐색·디버깅·재현·회고
   health:
-    label: On track · shared
+    label: 사용 중
   priority: bars
-  lead: WK
-  date: Q2 2026
+  lead: JS
+  date: Apr 27
   status:
     value: 100%
     variant: blue
   authorPageDate: Apr 27
-  authorPageMeta: External Skills
+  authorPageMeta: Skill
 ---
 
 # Claude Code — 학부연구생용 핵심 워크플로우 4개
