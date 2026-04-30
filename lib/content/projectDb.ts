@@ -97,6 +97,7 @@ export function projectRecordToRowProps(
   href: string,
 ): ProjectRowProps {
   return {
+    projectSlug: project.slug,
     href,
     dot: project.dot,
     name: title,
@@ -106,5 +107,11 @@ export function projectRecordToRowProps(
     lead: project.lead,
     date: project.targetDate,
     status: statusToRow(project),
+    propertyValues: {
+      health: project.health,
+      priority: project.priority,
+      lead: project.lead,
+      statusPct: project.statusPct,
+    },
   };
 }

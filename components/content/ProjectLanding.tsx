@@ -1,5 +1,6 @@
 import { LinearShell } from "@/components/linear/LinearShell";
 import { ProjectChrome } from "@/components/linear/ProjectChrome";
+import { ProjectPropertyEditor } from "@/components/linear/ProjectPropertyEditor";
 import { ProjectTabs } from "@/components/linear/ProjectTabs";
 import { GiscusEmbed } from "./GiscusEmbed";
 import {
@@ -177,12 +178,20 @@ export function ProjectLanding({ article, html, related, project }: Props) {
             </p>
             <div className="student-project-meta">
               <span>{article.date}</span>
-              {project ? <span>{project.health}</span> : null}
-              {project ? <span>{project.priority} priority</span> : null}
-              {project ? <span>lead {project.lead}</span> : null}
               <span>{open} open tasks</span>
               <span>{done} completed</span>
             </div>
+            {project ? (
+              <ProjectPropertyEditor
+                projectSlug={project.slug}
+                initial={{
+                  health: project.health,
+                  priority: project.priority,
+                  lead: project.lead,
+                  statusPct: project.statusPct,
+                }}
+              />
+            ) : null}
           </div>
           <aside className="student-progress-card">
             <span>Progress</span>

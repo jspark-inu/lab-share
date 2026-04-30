@@ -660,6 +660,15 @@ body:has(.linear-app) .md-content__inner::after {
   background: #f8f8f6;
 }
 
+.editable-project-row {
+  text-decoration: none;
+}
+
+.project-name-link {
+  color: inherit;
+  text-decoration: none;
+}
+
 .name-cell {
   display: flex;
   align-items: center;
@@ -789,6 +798,121 @@ body:has(.linear-app) .md-content__inner::after {
 
 .status-cell.blue .ring {
   border-color: var(--blue);
+}
+
+.project-property-select,
+.project-property-input {
+  min-height: 30px;
+  max-width: calc(100% - 10px);
+  border: 1px solid transparent;
+  border-radius: 7px;
+  background: transparent;
+  color: #343734;
+  font: inherit;
+}
+
+.project-property-select {
+  padding: 0 24px 0 8px;
+}
+
+.project-property-input.lead-cell {
+  display: block;
+  width: 46px;
+  height: 30px;
+  padding: 0 8px;
+  border-radius: 7px;
+  background: transparent;
+  text-align: center;
+}
+
+.project-property-select:hover,
+.project-property-select:focus,
+.project-property-input:hover,
+.project-property-input:focus {
+  border-color: var(--line);
+  background: #fff;
+  outline: none;
+}
+
+.project-property-panel {
+  display: grid;
+  gap: 12px;
+  max-width: 760px;
+  margin-top: 18px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fbfbfa;
+}
+
+.project-property-controls {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(120px, 1fr));
+  gap: 10px;
+}
+
+.project-property-controls label {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+
+.project-property-controls label span {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 760;
+  text-transform: uppercase;
+}
+
+.project-property-controls select,
+.project-property-controls input {
+  min-height: 34px;
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: #fff;
+  color: var(--text);
+  font: inherit;
+  font-size: 13px;
+}
+
+.project-property-controls select {
+  padding: 0 8px;
+}
+
+.project-property-controls input {
+  padding: 0 10px;
+}
+
+.project-property-preview {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.project-property-preview > span {
+  min-height: 28px;
+  padding: 0 8px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #fff;
+}
+
+.project-property-preview .priority-cell {
+  min-width: 42px;
+  justify-content: center;
+}
+
+.project-property-preview button {
+  min-height: 28px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: #fff;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 700;
 }
 
 .student-project-page {
