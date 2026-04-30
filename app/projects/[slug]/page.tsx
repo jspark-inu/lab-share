@@ -1,7 +1,12 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { ArticleLayout } from "@/components/content/ArticleLayout";
-import { articleDescription, getArticle, getCategorySlugs } from "@/lib/content/loader";
+import { ProjectLanding } from "@/components/content/ProjectLanding";
+import {
+  articleDescription,
+  getAllArticleSummaries,
+  getArticle,
+  getCategorySlugs,
+} from "@/lib/content/loader";
 import { renderMarkdown } from "@/lib/content/renderer";
 
 const CATEGORY = "projects" as const;
@@ -32,5 +37,11 @@ export default async function ProjectArticlePage({
   const article = await getArticle(CATEGORY, params.slug);
   if (!article) notFound();
   const html = await renderMarkdown(article.body);
-  return <ArticleLayout article={article} html={html} />;
+  const all = await getAllArticleSummaries();
+  const tags = new Set(article.tags.map((tag) => String(tag)));
+  const related = all.filter((item) => {
+    if (item.category === article.category && item.slug === article.slug) return false;
+    return item.tags.some((tag) => tags.has(String(tag)));
+  });
+  return <ProjectLanding article={article} html={html} related={related} />;
 }
