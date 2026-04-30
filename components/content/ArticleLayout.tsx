@@ -1,6 +1,7 @@
 import { LinearShell } from "@/components/linear/LinearShell";
 import { ProjectChrome } from "@/components/linear/ProjectChrome";
 import { ProjectTabs } from "@/components/linear/ProjectTabs";
+import { GiscusEmbed } from "./GiscusEmbed";
 import { CATEGORY_CONFIG } from "@/lib/content/categories";
 import type { Article } from "@/lib/content/types";
 
@@ -39,7 +40,7 @@ export function ArticleLayout({ article, html }: Props) {
           className="linear-article-body"
           dangerouslySetInnerHTML={{ __html: html }}
         />
-        {/* Phase 3: GiscusEmbed will mount here */}
+        {article.comments !== false ? <GiscusEmbed /> : null}
       </article>
     </LinearShell>
   );

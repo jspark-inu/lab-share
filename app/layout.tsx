@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import "../styles/globals.css";
+
+const CF_ANALYTICS_TOKEN = "bbd27652b28f4d5a957d3ec8604d7993";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://lab.haiinu.com"),
@@ -28,7 +31,15 @@ export default function RootLayout({
       <head>
         <link rel="preconnect" href="https://cdn.jsdelivr.net" crossOrigin="" />
       </head>
-      <body>{children}</body>
+      <body>
+        {children}
+        {/* Cloudflare Web Analytics — privacy-friendly PV tracking */}
+        <Script
+          src="https://static.cloudflareinsights.com/beacon.min.js"
+          strategy="afterInteractive"
+          data-cf-beacon={`{"token": "${CF_ANALYTICS_TOKEN}"}`}
+        />
+      </body>
     </html>
   );
 }
