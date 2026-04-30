@@ -36,6 +36,7 @@ export async function GET() {
       <guid isPermaLink="true">${url}</guid>
       <pubDate>${rfc822(a.date)}</pubDate>
       <category>${escapeXml(cat)}</category>
+      ${a.display.meta ? `<description>${escapeXml(a.display.meta)}</description>` : ""}
     </item>`;
     })
     .join("\n");

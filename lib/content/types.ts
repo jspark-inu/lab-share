@@ -3,6 +3,13 @@
  * 모든 article frontmatter는 ArticleFrontmatter 형태로 normalize 된다.
  */
 
+import type {
+  DotColor,
+  HealthVariant,
+  PriorityVariant,
+  StatusVariant,
+} from "@/components/linear/ProjectRow";
+
 export type CategorySlug =
   | "news"
   | "useful-github"
@@ -10,27 +17,27 @@ export type CategorySlug =
   | "external-skills"
   | "notice";
 
-/** 카테고리 dot 색상 토큰 — globals.css의 --orange/green/cyan/blue/amber/red/pink 와 매핑 */
-export type DotColor =
-  | "orange"
-  | "green"
-  | "cyan"
-  | "indigo"
-  | "amber"
-  | "red"
-  | "pink";
+/** Frontmatter 의 display 블록 — Linear ProjectRow 표시 메타. */
+export interface ArticleDisplay {
+  dot: DotColor;
+  meta?: string;
+  health: { label: string; variant?: HealthVariant };
+  priority: PriorityVariant;
+  lead: string;
+  date: string;
+  status: { value: string; variant?: StatusVariant };
+  /** 작성자 페이지에서의 표시용 짧은 날짜 (예: "Apr 27") */
+  authorPageDate?: string;
+  /** 작성자 페이지에서의 카테고리 라벨 (예: "News") */
+  authorPageMeta?: string;
+}
 
 export interface ArticleFrontmatter {
   title: string;
   date: string;
   authors: string[];
   tags: string[];
-  /**
-   * 레거시 display 블록 — Linear redesign 시기 dummy 메타가 들어있음.
-   * 새 ArticleRow 는 더 이상 참조하지 않지만, 기존 .md 파일들은
-   * frontmatter 에 이 키를 유지하므로 unknown 으로 받아만 둔다.
-   */
-  display?: unknown;
+  display: ArticleDisplay;
   /** 댓글 위젯 노출 여부 (기본 true) */
   comments?: boolean;
 }

@@ -92,43 +92,6 @@ export async function getAllArticleSummaries(): Promise<ArticleSummary[]> {
   return flat;
 }
 
-/** OG/메타 description 용 — 글 body 의 첫 의미있는 한 문단을 짧게 자른다. */
-export function articleDescription(body: string, maxLen = 140): string {
-  const stripped = body
-    .replace(/^---[\s\S]*?---/, "") // 혹시 남아있을 frontmatter 블록 (방어)
-    .replace(/^#.*$/gm, "") // 헤딩 라인 제거
-    .replace(/^>.*$/gm, "") // blockquote 제거
-    .replace(/\!\[[^\]]*\]\([^)]+\)/g, "") // 이미지
-    .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1") // 링크 → 텍스트만
-    .replace(/[*_`]/g, "")
-    .trim();
-  const firstParagraph = stripped.split(/\n\s*\n/)[0]?.replace(/\s+/g, " ").trim() ?? "";
-  if (firstParagraph.length <= maxLen) return firstParagraph;
-  return firstParagraph.slice(0, maxLen - 1).trimEnd() + "…";
-}
-
-/** 카테고리별 글 수 — 사이드바·홈 카드에서 쓴다 */
-export async function getCategoryCounts(): Promise<Record<CategorySlug, number>> {
-  const entries = await Promise.all(
-    CATEGORY_SLUGS.map(async (c) => [c, (await listFiles(c)).length] as const),
-  );
-  return Object.fromEntries(entries) as Record<CategorySlug, number>;
-}
-
-/** 모든 글에서 태그를 집계 — Tags 페이지·필터에서 쓴다 */
-export async function getTagCounts(): Promise<{ tag: string; count: number }[]> {
-  const all = await getAllArticleSummaries();
-  const counts = new Map<string, number>();
-  for (const a of all) {
-    for (const t of a.tags ?? []) {
-      counts.set(t, (counts.get(t) ?? 0) + 1);
-    }
-  }
-  return [...counts.entries()]
-    .map(([tag, count]) => ({ tag, count }))
-    .sort((a, b) => (b.count - a.count) || a.tag.localeCompare(b.tag));
-}
-
 /** 단일 article (404 시 null) — slug 가 percent-encoded 든 raw 든 모두 매칭 */
 export async function getArticle(
   category: CategorySlug,

@@ -1,75 +1,74 @@
-"use client";
-
-import { useMemo, useState } from "react";
-import { ArticleRow } from "./ArticleRow";
-import { ArticleTableHead, SectionRow } from "./ArticleTableHead";
-import type { ArticleSummary, AuthorRecord } from "@/lib/content/types";
-
-export interface TagBucket {
-  tag: string;
-  count: number;
-}
+import { LinearShell } from "@/components/linear/LinearShell";
+import { ProjectChrome } from "@/components/linear/ProjectChrome";
+import { ProjectTabs } from "@/components/linear/ProjectTabs";
+import { FilterRow } from "@/components/linear/FilterRow";
+import { TableHead, QuarterRow } from "@/components/linear/TableHead";
+import { ProjectRow } from "@/components/linear/ProjectRow";
+import type { ArticleSummary } from "@/lib/content/types";
 
 interface Props {
   articles: ArticleSummary[];
-  tagBuckets: TagBucket[];
-  authors: Record<string, AuthorRecord>;
 }
 
 /**
- * Tags 페이지의 인터랙티브 부분 — 칩 + 필터링된 테이블.
- * 외곽 (LinearShell, ProjectChrome, ProjectTabs)은 서버 컴포넌트가 감싼다.
+ * Tags 페이지 — Linear "Views" UI.
+ * 현 docs/tags.md 를 정확히 1:1 재현.
+ * 사용자 원본은 3개 row(학과/agent/abm)를 직접 큐레이션 — 우리도 같은 큐레이션 유지.
+ * (자동으로 모든 tag 를 list 하면 너무 많아짐.)
  */
-export function TagsView({ articles, tagBuckets, authors }: Props) {
-  const [active, setActive] = useState<string | undefined>(undefined);
-
-  const visible = useMemo(() => {
-    if (!active) return articles;
-    return articles.filter((a) => (a.tags ?? []).includes(active));
-  }, [articles, active]);
-
-  const sectionLabel = active ? `#${active}` : "All articles";
-
+export function TagsView({ articles: _articles }: Props) {
   return (
-    <>
-      <section className="filter-bar" aria-label="Filter by tag">
-        <button
-          type="button"
-          className="filter-chip"
-          aria-pressed={active === undefined}
-          onClick={() => setActive(undefined)}
-        >
-          All
-        </button>
-        {tagBuckets.map((b) => (
-          <button
-            key={b.tag}
-            type="button"
-            className="filter-chip"
-            aria-pressed={active === b.tag}
-            onClick={() => setActive((prev) => (prev === b.tag ? undefined : b.tag))}
-          >
-            #{b.tag} <span style={{ marginLeft: 4, opacity: 0.7 }}>{b.count}</span>
-          </button>
-        ))}
+    <LinearShell activeKeys={["views"]}>
+      <ProjectChrome title="◇ Views" />
+      <ProjectTabs
+        tabs={[
+          { label: "Tags", href: "/tags/", variant: "strong" },
+          { label: "◇ All views", href: "/tags/", variant: "active" },
+          { label: "Projects", href: "/" },
+          { label: "Signals", href: "/news/" },
+          { label: "Authors", href: "/authors/jspark-inu/", variant: "quiet" },
+        ]}
+        primaryActionLabel="＋ Create view"
+        primaryActionHref="/notice/"
+      />
+      <FilterRow />
+      <section className="projects-table" aria-label="Tags table">
+        <TableHead />
+        <QuarterRow label="Views" />
+        <ProjectRow
+          href="/news/"
+          dot="amber"
+          name="학과 / 개편 / AI"
+          meta="department transition signals"
+          health={{ label: "On track · active" }}
+          priority="muted"
+          lead="NS"
+          date="Q2 2026"
+          status={{ value: "3" }}
+        />
+        <ProjectRow
+          href="/useful-github/"
+          dot="cyan"
+          name="github / agent / claude"
+          meta="agent tooling resources"
+          health={{ label: "On track · active" }}
+          priority="bars"
+          lead="GT"
+          date="Q2 2026"
+          status={{ value: "3", variant: "blue" }}
+        />
+        <ProjectRow
+          href="/lab-skills/"
+          dot="green"
+          name="abm / simulation / environment"
+          meta="research experiment setup"
+          health={{ label: "On track · active" }}
+          priority="bars"
+          lead="RO"
+          date="Q2 2026"
+          status={{ value: "3", variant: "gold" }}
+        />
       </section>
-
-      <section className="projects-table" aria-label="Articles by tag">
-        <ArticleTableHead showCategory={true} />
-        <SectionRow label={sectionLabel} count={visible.length} />
-        {visible.length === 0 ? (
-          <div className="filter-empty">해당 태그의 글이 없어요</div>
-        ) : (
-          visible.map((a) => (
-            <ArticleRow
-              key={`${a.category}-${a.slug}`}
-              article={a}
-              showCategory={true}
-              authorInitials={authors[a.authors?.[0] ?? ""]?.initials ?? "?"}
-            />
-          ))
-        )}
-      </section>
-    </>
+    </LinearShell>
   );
 }

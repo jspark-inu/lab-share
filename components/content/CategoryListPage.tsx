@@ -1,9 +1,10 @@
 import { LinearShell } from "@/components/linear/LinearShell";
 import { ProjectChrome } from "@/components/linear/ProjectChrome";
 import { ProjectTabs } from "@/components/linear/ProjectTabs";
-import { FilterableArticleTable } from "./FilterableArticleTable";
-import { categoryTabs, type CategoryConfig } from "@/lib/content/categories";
-import { getAuthors } from "@/lib/content/loader";
+import { FilterRow } from "@/components/linear/FilterRow";
+import { TableHead, QuarterRow } from "@/components/linear/TableHead";
+import { ArticleProjectRow } from "./ArticleProjectRow";
+import type { CategoryConfig } from "@/lib/content/categories";
 import type { ArticleSummary } from "@/lib/content/types";
 
 interface Props {
@@ -13,24 +14,31 @@ interface Props {
 
 /**
  * 5개 카테고리 인덱스 페이지의 공통 shell.
- * 단일 카테고리이므로 카테고리 컬럼/필터 칩은 숨기고 검색만 노출.
+ * 디자인 1:1: docs/{cat}/index.md 의 Linear projects-table 구조 그대로.
  */
-export async function CategoryListPage({ config, articles }: Props) {
-  const authors = await getAuthors();
+export function CategoryListPage({ config, articles }: Props) {
+  const tabs = [
+    { label: config.pageTitle, href: `/${config.slug}/`, variant: "strong" as const },
+    { label: config.activeTabLabel, href: `/${config.slug}/`, variant: "active" as const },
+    ...config.extraTabs,
+  ];
+
   return (
     <LinearShell activeKeys={config.activeKeys}>
       <ProjectChrome title={config.chromeTitle} />
       <ProjectTabs
-        tabs={categoryTabs(config.slug)}
-        showDisplay={false}
+        tabs={tabs}
+        primaryActionLabel={config.primaryActionLabel}
+        primaryActionHref="/notice/"
       />
-      <FilterableArticleTable
-        articles={articles}
-        authors={authors}
-        lockedCategory={config.slug}
-        sectionLabel={config.sectionLabel}
-        emptyMessage={config.emptyMessage}
-      />
+      <FilterRow />
+      <section className="projects-table" aria-label={config.ariaLabel}>
+        <TableHead />
+        <QuarterRow label={config.quarterLabel} />
+        {articles.map((a) => (
+          <ArticleProjectRow key={a.slug} article={a} />
+        ))}
+      </section>
     </LinearShell>
   );
 }
