@@ -1,39 +1,72 @@
-name: Deploy MkDocs to GitHub Pages
+name: Deploy Next.js to GitHub Pages
 
 on:
   push:
     branches:
       - main
+      # also build on next-migration so we can verify CI before cutover
+      - next-migration
   workflow_dispatch:
 
 permissions:
   contents: write
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment, skipping queued mid-flight runs
+concurrency:
+  group: pages
+  cancel-in-progress: false
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
         with:
-          fetch-depth: 0
+          node-version: '20'
+          cache: 'npm'
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - name: Install npm dependencies
+        run: npm ci
+
+      - name: Build static export
+        run: npm run build
+        env:
+          # Phase 5 backend integration is deferred — left empty intentionally
+          NEXT_PUBLIC_API_BASE: ''
+
+      - name: Verify CNAME present in out/
+        run: |
+          test -f out/CNAME || (echo "CNAME missing from out/" && exit 1)
+          cat out/CNAME
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
         with:
-          python-version: '3.12'
+          name: out
+          path: out
+          retention-days: 7
 
-      - name: Install system dependencies (Cairo + Pango + Korean fonts for social plugin)
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y libcairo2-dev libpango1.0-dev fonts-noto-cjk
-
-      - name: Install Python dependencies
-        run: |
-          pip install \
-            "mkdocs-material[imaging]" \
-            mkdocs-rss-plugin \
-            "pillow>=10.0" \
-            "cairosvg>=2.7"
+  deploy:
+    # Only deploy from main; next-migration runs build for verification only
+    if: github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: out
+          path: out
 
       - name: Deploy to gh-pages
-        run: mkdocs gh-deploy --force --clean --verbose
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./out
+          cname: lab.haiinu.com
+          force_orphan: true
+          commit_message: 'deploy: ${{ github.sha }}'
