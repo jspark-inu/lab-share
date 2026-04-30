@@ -1,19 +1,28 @@
 import Link from "next/link";
 
 export type RailNavKey =
+  // Primary nav (top section)
+  | "inbox"
+  | "myissues"
+  | "pulse"
+  // Workspace block
+  | "initiatives"
   | "projects"
   | "views"
   | "teams"
-  | "initiatives"
   | "more"
-  | "inbox"
-  | "myissues"
-  | "pulse";
+  // Your teams chips
+  | "research-ops"
+  | "tooling"
+  | "workflows";
 
 interface LinearRailProps {
-  /** Which workspace nav item is highlighted */
-  activeKey?: RailNavKey;
-  /** Inbox badge count (default 3 to match current sites) */
+  /**
+   * 활성 표시할 nav 키들. 페이지마다 여러 항목이 동시 active일 수 있음
+   * (예: news = ["pulse", "initiatives"]).
+   */
+  activeKeys?: RailNavKey[];
+  /** Inbox badge count (default 3) */
   inboxBadge?: number;
   /** Pulse badge count (default 1) */
   pulseBadge?: number;
@@ -24,12 +33,12 @@ interface LinearRailProps {
  * 디자인 시스템 SSOT: docs/stylesheets/extra.css 의 .linear-rail 외 클래스 1:1 포팅.
  */
 export function LinearRail({
-  activeKey = "projects",
+  activeKeys = [],
   inboxBadge = 3,
   pulseBadge = 1,
 }: LinearRailProps) {
-  const isActive = (key: RailNavKey) =>
-    activeKey === key ? "active" : undefined;
+  const set = new Set(activeKeys);
+  const cls = (key: RailNavKey) => (set.has(key) ? "active" : undefined);
 
   return (
     <aside className="linear-rail">
@@ -46,14 +55,14 @@ export function LinearRail({
       </div>
 
       <nav className="primary-nav" aria-label="Workspace navigation">
-        <Link href="/notice/" className={isActive("inbox")}>
+        <Link href="/notice/" className={cls("inbox")}>
           <span className="nav-glyph">⌂</span>Inbox{" "}
           {inboxBadge > 0 ? <em>{inboxBadge}</em> : null}
         </Link>
-        <Link href="/lab-skills/" className={isActive("myissues")}>
+        <Link href="/lab-skills/" className={cls("myissues")}>
           <span className="nav-glyph">◌</span>My issues
         </Link>
-        <Link href="/news/" className={isActive("pulse")}>
+        <Link href="/news/" className={cls("pulse")}>
           <span className="nav-glyph">↯</span>Pulse{" "}
           {pulseBadge > 0 ? <em>{pulseBadge}</em> : null}
         </Link>
@@ -61,32 +70,32 @@ export function LinearRail({
 
       <div className="nav-block">
         <p>Workspace</p>
-        <Link href="/news/" className={isActive("initiatives")}>
+        <Link href="/news/" className={cls("initiatives")}>
           <span className="nav-glyph">⌃</span>Initiatives
         </Link>
-        <Link href="/" className={isActive("projects")}>
+        <Link href="/" className={cls("projects")}>
           <span className="nav-glyph">◇</span>Projects
         </Link>
-        <Link href="/tags/" className={isActive("views")}>
+        <Link href="/tags/" className={cls("views")}>
           <span className="nav-glyph">▱</span>Views
         </Link>
-        <Link href="/authors/jspark-inu/" className={isActive("teams")}>
+        <Link href="/authors/jspark-inu/" className={cls("teams")}>
           <span className="nav-glyph">▣</span>Teams
         </Link>
-        <Link href="/notice/" className={isActive("more")}>
+        <Link href="/notice/" className={cls("more")}>
           <span className="nav-glyph">⋯</span>More
         </Link>
       </div>
 
       <div className="nav-block">
         <p>Your teams</p>
-        <Link href="/lab-skills/">
+        <Link href="/lab-skills/" className={cls("research-ops")}>
           <span className="team-chip blue">R</span>Research ops <b>›</b>
         </Link>
-        <Link href="/useful-github/">
+        <Link href="/useful-github/" className={cls("tooling")}>
           <span className="team-chip purple">T</span>Tooling <b>›</b>
         </Link>
-        <Link href="/external-skills/">
+        <Link href="/external-skills/" className={cls("workflows")}>
           <span className="team-chip mint">W</span>Workflows <b>›</b>
         </Link>
       </div>

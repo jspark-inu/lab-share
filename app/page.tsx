@@ -17,7 +17,7 @@ export const metadata: Metadata = {
  */
 export default function HomePage() {
   return (
-    <LinearShell activeKey="projects">
+    <LinearShell activeKeys={["projects"]}>
       <ProjectChrome title="◇ Projects" />
 
       <ProjectTabs

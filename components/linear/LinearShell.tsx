@@ -1,7 +1,8 @@
 import { LinearRail, type RailNavKey } from "./LinearRail";
 
 interface LinearShellProps {
-  activeKey?: RailNavKey;
+  /** 활성 표시할 rail nav 키들 (여러 개 동시 가능) */
+  activeKeys?: RailNavKey[];
   inboxBadge?: number;
   pulseBadge?: number;
   children: React.ReactNode;
@@ -13,7 +14,7 @@ interface LinearShellProps {
  * children은 ProjectChrome + ProjectTabs + FilterRow + 본문 등 페이지별 surface 구성.
  */
 export function LinearShell({
-  activeKey,
+  activeKeys,
   inboxBadge,
   pulseBadge,
   children,
@@ -21,7 +22,7 @@ export function LinearShell({
   return (
     <section className="linear-app">
       <LinearRail
-        activeKey={activeKey}
+        activeKeys={activeKeys}
         inboxBadge={inboxBadge}
         pulseBadge={pulseBadge}
       />
