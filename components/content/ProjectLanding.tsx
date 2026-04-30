@@ -7,12 +7,14 @@ import {
   type ProjectRecord,
   type StudentTask,
 } from "./StudentTaskBoard";
+import type { ProjectRecord as DbProjectRecord } from "@/lib/content/projectDb";
 import type { Article, ArticleSummary } from "@/lib/content/types";
 
 interface Props {
   article: Article;
   html: string;
   related: ArticleSummary[];
+  project: DbProjectRecord | null;
 }
 
 type Horizon = StudentTask["horizon"];
@@ -39,6 +41,17 @@ function sectionHorizon(title: string, fallbackIndex: number): Horizon {
   if (title.includes("중기") || title.includes("中") || lower.includes("medium")) return "medium";
   if (title.includes("장기") || title.includes("長") || lower.includes("long")) return "long";
   return (["short", "medium", "long"] as Horizon[])[Math.min(fallbackIndex, 2)];
+}
+
+function tasksFromProjectRecord(project: DbProjectRecord): StudentTask[] {
+  return project.tasks.map((task) => ({
+    id: task.slug,
+    title: task.title,
+    horizon: task.horizon,
+    status: task.status,
+    source: `${task.owner} · ${task.priority}`,
+    href: `/projects/${project.slug}/tasks/${task.slug}/`,
+  }));
 }
 
 function extractTasks(body: string): StudentTask[] {
@@ -82,7 +95,7 @@ function buildGoals(tasks: StudentTask[]) {
     return {
       horizon,
       label: HORIZON_LABELS[horizon],
-      title: lane[0]?.source ?? `${HORIZON_LABELS[horizon]} goal`,
+      title: `${HORIZON_LABELS[horizon]} goal`,
       detail: lane[0]?.title ?? "Add project tasks in this horizon.",
       count: lane.length,
     };
@@ -131,8 +144,8 @@ function buildRecords(
   ];
 }
 
-export function ProjectLanding({ article, html, related }: Props) {
-  const tasks = extractTasks(article.body);
+export function ProjectLanding({ article, html, related, project }: Props) {
+  const tasks = project ? tasksFromProjectRecord(project) : extractTasks(article.body);
   const goals = buildGoals(tasks);
   const records = buildRecords(article, related, tasks);
   const open = tasks.filter((task) => task.status !== "done").length;
@@ -164,6 +177,9 @@ export function ProjectLanding({ article, html, related }: Props) {
             </p>
             <div className="student-project-meta">
               <span>{article.date}</span>
+              {project ? <span>{project.health}</span> : null}
+              {project ? <span>{project.priority} priority</span> : null}
+              {project ? <span>lead {project.lead}</span> : null}
               <span>{open} open tasks</span>
               <span>{done} completed</span>
             </div>

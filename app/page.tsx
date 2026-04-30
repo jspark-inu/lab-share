@@ -4,8 +4,8 @@ import { ProjectChrome } from "@/components/linear/ProjectChrome";
 import { ProjectTabs } from "@/components/linear/ProjectTabs";
 import { FilterRow } from "@/components/linear/FilterRow";
 import { SortableProjectsTable } from "@/components/linear/SortableProjectsTable";
-import { articleToProjectRowProps } from "@/components/content/ArticleProjectRow";
 import { getArticleSummariesByCategory } from "@/lib/content/loader";
+import { getProjectRecords, projectRecordToRowProps } from "@/lib/content/projectDb";
 
 export const metadata: Metadata = {
   title: "Home",
@@ -18,7 +18,15 @@ export const metadata: Metadata = {
  */
 export default async function HomePage() {
   const projects = await getArticleSummariesByCategory("projects");
-  const rows = projects.map((p) => articleToProjectRowProps({ article: p }));
+  const projectRecords = await getProjectRecords();
+  const articlesBySlug = new Map(projects.map((article) => [article.slug, article]));
+  const rows = projectRecords
+    .map((project) => {
+      const article = articlesBySlug.get(project.slug);
+      if (!article) return null;
+      return projectRecordToRowProps(project, article.title, article.href);
+    })
+    .filter((row): row is NonNullable<typeof row> => Boolean(row));
 
   return (
     <LinearShell activeKeys={["home"]}>

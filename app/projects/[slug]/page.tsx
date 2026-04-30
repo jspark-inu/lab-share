@@ -7,6 +7,7 @@ import {
   getArticle,
   getCategorySlugs,
 } from "@/lib/content/loader";
+import { getProjectRecord } from "@/lib/content/projectDb";
 import { renderMarkdown } from "@/lib/content/renderer";
 
 const CATEGORY = "projects" as const;
@@ -43,5 +44,6 @@ export default async function ProjectArticlePage({
     if (item.category === article.category && item.slug === article.slug) return false;
     return item.tags.some((tag) => tags.has(String(tag)));
   });
-  return <ProjectLanding article={article} html={html} related={related} />;
+  const project = await getProjectRecord(article.slug);
+  return <ProjectLanding article={article} html={html} related={related} project={project} />;
 }

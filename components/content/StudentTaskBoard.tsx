@@ -8,6 +8,7 @@ export interface StudentTask {
   horizon: "short" | "medium" | "long";
   status: "todo" | "active" | "done";
   source: string;
+  href?: string;
 }
 
 export interface ProjectRecord {
@@ -86,15 +87,26 @@ export function StudentTaskBoard({ tasks, records }: Props) {
                 </div>
                 <div className="student-task-list">
                   {laneTasks.length ? (
-                    laneTasks.map((task) => (
-                      <div className={`student-task-card ${task.status}`} key={task.id}>
-                        <div className="student-task-title">{task.title}</div>
-                        <div className="student-task-meta">
-                          <span>{STATUS_LABEL[task.status]}</span>
-                          <span>{task.source}</span>
+                    laneTasks.map((task) => {
+                      const inner = (
+                        <>
+                          <div className="student-task-title">{task.title}</div>
+                          <div className="student-task-meta">
+                            <span>{STATUS_LABEL[task.status]}</span>
+                            <span>{task.source}</span>
+                          </div>
+                        </>
+                      );
+                      return task.href ? (
+                        <a className={`student-task-card ${task.status}`} href={task.href} key={task.id}>
+                          {inner}
+                        </a>
+                      ) : (
+                        <div className={`student-task-card ${task.status}`} key={task.id}>
+                          {inner}
                         </div>
-                      </div>
-                    ))
+                      );
+                    })
                   ) : (
                     <p className="student-empty">No matching tasks.</p>
                   )}
