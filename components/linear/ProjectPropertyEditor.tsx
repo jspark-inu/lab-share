@@ -3,7 +3,6 @@
 import { useEffect, useMemo, useState } from "react";
 import {
   healthToDisplay,
-  priorityToVariant,
   statusToDisplay,
   type EditableProjectHealth,
   type EditableProjectPriority,
@@ -87,9 +86,26 @@ export function useProjectPropertyOverrides() {
 interface EditorProps {
   projectSlug: string;
   initial: EditableProjectProperties;
+  date: string;
+  openTasks: number;
+  completedTasks: number;
 }
 
-export function ProjectPropertyEditor({ projectSlug, initial }: EditorProps) {
+const PRIORITY_LABELS: Record<EditableProjectPriority, string> = {
+  high: "High priority",
+  medium: "Medium priority",
+  low: "Low priority",
+  none: "No priority",
+};
+
+export function ProjectPropertyEditor({
+  projectSlug,
+  initial,
+  date,
+  openTasks,
+  completedTasks,
+}: EditorProps) {
+  const [editing, setEditing] = useState(false);
   const { overrides, setProjectProperties, resetProjectProperties } =
     useProjectPropertyOverrides();
   const values = useMemo(
@@ -98,18 +114,22 @@ export function ProjectPropertyEditor({ projectSlug, initial }: EditorProps) {
   );
   const health = healthToDisplay(values.health);
   const status = statusToDisplay(values.statusPct);
-  const priorityVariant = priorityToVariant(values.priority);
 
   const update = (patch: Partial<EditableProjectProperties>) => {
     setProjectProperties(projectSlug, { ...values, ...patch });
   };
 
   return (
-    <section className="project-property-panel" aria-label="Project properties">
-      <div className="project-property-controls">
-        <label>
-          <span>Health</span>
+    <div
+      className={`student-project-meta project-property-inline ${editing ? "editing" : ""}`}
+      aria-label="Project properties"
+    >
+      <span>{date}</span>
+      {editing ? (
+        <>
           <select
+            className="project-meta-select"
+            aria-label="Health"
             value={values.health}
             onChange={(event) =>
               update({ health: event.target.value as EditableProjectHealth })
@@ -119,10 +139,9 @@ export function ProjectPropertyEditor({ projectSlug, initial }: EditorProps) {
             <option value="at-risk">At risk</option>
             <option value="paused">Paused</option>
           </select>
-        </label>
-        <label>
-          <span>Priority</span>
           <select
+            className="project-meta-select"
+            aria-label="Priority"
             value={values.priority}
             onChange={(event) =>
               update({ priority: event.target.value as EditableProjectPriority })
@@ -133,17 +152,15 @@ export function ProjectPropertyEditor({ projectSlug, initial }: EditorProps) {
             <option value="low">Low</option>
             <option value="none">None</option>
           </select>
-        </label>
-        <label>
-          <span>Lead</span>
           <input
+            className="project-meta-input"
+            aria-label="Lead"
             value={values.lead}
             onChange={(event) => update({ lead: event.target.value })}
           />
-        </label>
-        <label>
-          <span>Status</span>
           <select
+            className="project-meta-select"
+            aria-label="Status"
             value={values.statusPct}
             onChange={(event) => update({ statusPct: Number(event.target.value) })}
           >
@@ -153,25 +170,37 @@ export function ProjectPropertyEditor({ projectSlug, initial }: EditorProps) {
             <option value={75}>75%</option>
             <option value={100}>100%</option>
           </select>
-        </label>
-      </div>
-      <div className="project-property-preview">
+        </>
+      ) : (
+        <>
         <span className={`health-cell ${health.variant === "atrisk" ? "at-risk" : health.variant === "muted" ? "muted" : ""}`}>
           <span className="spinner"></span>
           {health.label}
         </span>
-        <span className={`priority-cell ${priorityVariant === "bars-high" ? "bars high" : priorityVariant === "bars" ? "bars" : "muted"}`}>
-          {priorityVariant === "muted" ? "---" : <><i></i><i></i><i></i></>}
-        </span>
+        <span>{PRIORITY_LABELS[values.priority]}</span>
         <span>{values.lead}</span>
         <span className={`status-cell ${status.variant === "gold" ? "gold" : status.variant === "blue" ? "blue" : ""}`}>
           <span className="ring"></span>
           {status.value}
         </span>
+        </>
+      )}
+      <span>{openTasks} open tasks</span>
+      <span>{completedTasks} completed</span>
+      {editing ? (
+        <>
         <button type="button" onClick={() => resetProjectProperties(projectSlug)}>
           Reset
         </button>
-      </div>
-    </section>
+        <button type="button" onClick={() => setEditing(false)}>
+          Done
+        </button>
+        </>
+      ) : (
+        <button type="button" onClick={() => setEditing(true)}>
+          Edit
+        </button>
+      )}
+    </div>
   );
 }

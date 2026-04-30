@@ -176,14 +176,12 @@ export function ProjectLanding({ article, html, related, project }: Props) {
               Project work is organized as goals, student tasks, and records.
               The task inbox below is separate from the professor's private task system.
             </p>
-            <div className="student-project-meta">
-              <span>{article.date}</span>
-              <span>{open} open tasks</span>
-              <span>{done} completed</span>
-            </div>
             {project ? (
               <ProjectPropertyEditor
                 projectSlug={project.slug}
+                date={article.date}
+                openTasks={open}
+                completedTasks={done}
                 initial={{
                   health: project.health,
                   priority: project.priority,
@@ -191,7 +189,13 @@ export function ProjectLanding({ article, html, related, project }: Props) {
                   statusPct: project.statusPct,
                 }}
               />
-            ) : null}
+            ) : (
+              <div className="student-project-meta">
+                <span>{article.date}</span>
+                <span>{open} open tasks</span>
+                <span>{done} completed</span>
+              </div>
+            )}
           </div>
           <aside className="student-progress-card">
             <span>Progress</span>

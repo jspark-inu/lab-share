@@ -834,87 +834,6 @@ body:has(.linear-app) .md-content__inner::after {
   outline: none;
 }
 
-.project-property-panel {
-  display: grid;
-  gap: 12px;
-  max-width: 760px;
-  margin-top: 18px;
-  padding: 14px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: #fbfbfa;
-}
-
-.project-property-controls {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(120px, 1fr));
-  gap: 10px;
-}
-
-.project-property-controls label {
-  display: grid;
-  gap: 6px;
-  min-width: 0;
-}
-
-.project-property-controls label span {
-  color: var(--muted);
-  font-size: 11px;
-  font-weight: 760;
-  text-transform: uppercase;
-}
-
-.project-property-controls select,
-.project-property-controls input {
-  min-height: 34px;
-  min-width: 0;
-  border: 1px solid var(--line);
-  border-radius: 7px;
-  background: #fff;
-  color: var(--text);
-  font: inherit;
-  font-size: 13px;
-}
-
-.project-property-controls select {
-  padding: 0 8px;
-}
-
-.project-property-controls input {
-  padding: 0 10px;
-}
-
-.project-property-preview {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 10px;
-}
-
-.project-property-preview > span {
-  min-height: 28px;
-  padding: 0 8px;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  background: #fff;
-}
-
-.project-property-preview .priority-cell {
-  min-width: 42px;
-  justify-content: center;
-}
-
-.project-property-preview button {
-  min-height: 28px;
-  border: 1px solid var(--line);
-  border-radius: 7px;
-  background: #fff;
-  color: var(--muted);
-  cursor: pointer;
-  font-size: 12px;
-  font-weight: 700;
-}
-
 .student-project-page {
   min-height: calc(100vh - 75px);
   background: #fff;
@@ -978,6 +897,62 @@ body:has(.linear-app) .md-content__inner::after {
   border: 1px solid var(--line);
   border-radius: 999px;
   background: #f7f8f5;
+}
+
+.project-property-inline {
+  align-items: center;
+}
+
+.project-property-inline .health-cell,
+.project-property-inline .status-cell {
+  gap: 6px;
+  color: #595d59;
+}
+
+.project-property-inline .health-cell.at-risk {
+  color: #b79b18;
+}
+
+.project-property-inline .health-cell.muted {
+  color: #9a9d99;
+}
+
+.project-meta-select,
+.project-meta-input,
+.project-property-inline button {
+  min-height: 24px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.project-meta-select {
+  max-width: 142px;
+  padding: 0 24px 0 9px;
+}
+
+.project-meta-input {
+  width: 54px;
+  padding: 0 10px;
+  text-align: center;
+}
+
+.project-property-inline button {
+  padding: 0 10px;
+  cursor: pointer;
+}
+
+.project-property-inline button:hover,
+.project-meta-select:hover,
+.project-meta-select:focus,
+.project-meta-input:hover,
+.project-meta-input:focus {
+  border-color: #c9cdc6;
+  color: var(--text);
+  outline: none;
 }
 
 .student-progress-card {
