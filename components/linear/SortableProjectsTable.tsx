@@ -40,7 +40,7 @@ type SortDir = "asc" | "desc";
 export function SortableProjectsTable({ groups, ariaLabel }: Props) {
   const [sortKey, setSortKey] = useState<SortKey | null>(null);
   const [sortDir, setSortDir] = useState<SortDir>("asc");
-  const { overrides, setProjectProperties } = useProjectPropertyOverrides();
+  const { overrides } = useProjectPropertyOverrides();
   const effectiveGroups = groups.map((group) => ({
     ...group,
     rows: group.rows.map((row) => {
@@ -87,39 +87,18 @@ export function SortableProjectsTable({ groups, ariaLabel }: Props) {
         onHeaderClick={handleHeaderClick}
       />
       {renderGroups.map((g, i) => (
-        <FragmentGroup
-          key={`${g.label}-${i}`}
-          group={g}
-          onPropertyChange={(row, next) => {
-            if (row.projectSlug) setProjectProperties(row.projectSlug, next);
-          }}
-        />
+        <FragmentGroup key={`${g.label}-${i}`} group={g} />
       ))}
     </section>
   );
 }
 
-function FragmentGroup({
-  group,
-  onPropertyChange,
-}: {
-  group: SortableGroup;
-  onPropertyChange: (
-    row: ProjectRowProps,
-    next: NonNullable<ProjectRowProps["propertyValues"]>,
-  ) => void;
-}) {
+function FragmentGroup({ group }: { group: SortableGroup }) {
   return (
     <>
       <QuarterRow label={group.label} />
       {group.rows.map((row) => (
-        <ProjectRow
-          key={`${row.name}-${row.href}`}
-          {...row}
-          onPropertyChange={
-            row.propertyValues ? (next) => onPropertyChange(row, next) : undefined
-          }
-        />
+        <ProjectRow key={`${row.name}-${row.href}`} {...row} />
       ))}
     </>
   );

@@ -881,7 +881,7 @@ body:has(.linear-app) .md-content__inner::after {
   margin-top: 16px;
 }
 
-.student-project-meta span,
+.student-project-meta > span,
 .student-progress-card span,
 .student-progress-card p {
   color: var(--muted);
@@ -889,7 +889,7 @@ body:has(.linear-app) .md-content__inner::after {
   font-weight: 650;
 }
 
-.student-project-meta span {
+.student-project-meta > span {
   display: inline-flex;
   min-height: 24px;
   align-items: center;
@@ -905,8 +905,12 @@ body:has(.linear-app) .md-content__inner::after {
 
 .project-property-inline .health-cell,
 .project-property-inline .status-cell {
+  display: inline-flex;
+  align-items: center;
   gap: 6px;
   color: #595d59;
+  font-size: 12px;
+  font-weight: 650;
 }
 
 .project-property-inline .health-cell.at-risk {
