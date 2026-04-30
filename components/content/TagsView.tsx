@@ -2,8 +2,8 @@ import { LinearShell } from "@/components/linear/LinearShell";
 import { ProjectChrome } from "@/components/linear/ProjectChrome";
 import { ProjectTabs } from "@/components/linear/ProjectTabs";
 import { FilterRow } from "@/components/linear/FilterRow";
-import { TableHead, QuarterRow } from "@/components/linear/TableHead";
-import { ProjectRow } from "@/components/linear/ProjectRow";
+import { SortableProjectsTable } from "@/components/linear/SortableProjectsTable";
+import type { ProjectRowProps } from "@/components/linear/ProjectRow";
 import type { ArticleSummary } from "@/lib/content/types";
 
 interface Props {
@@ -12,10 +12,45 @@ interface Props {
 
 /**
  * Tags 페이지 — Linear "Views" UI.
- * 현 docs/tags.md 를 정확히 1:1 재현.
- * 사용자 원본은 3개 row(학과/agent/abm)를 직접 큐레이션 — 우리도 같은 큐레이션 유지.
- * (자동으로 모든 tag 를 list 하면 너무 많아짐.)
+ * 현 docs/tags.md 를 정확히 1:1 재현 (큐레이션 3개 view).
+ * 정렬은 SortableProjectsTable 에서 처리 — 디자인 변경 0.
  */
+const TAG_ROWS: ProjectRowProps[] = [
+  {
+    href: "/news/",
+    dot: "amber",
+    name: "학과 / 개편 / AI",
+    meta: "department transition signals",
+    health: { label: "On track · active" },
+    priority: "muted",
+    lead: "NS",
+    date: "Q2 2026",
+    status: { value: "3" },
+  },
+  {
+    href: "/useful-github/",
+    dot: "cyan",
+    name: "github / agent / claude",
+    meta: "agent tooling resources",
+    health: { label: "On track · active" },
+    priority: "bars",
+    lead: "GT",
+    date: "Q2 2026",
+    status: { value: "3", variant: "blue" },
+  },
+  {
+    href: "/lab-skills/",
+    dot: "green",
+    name: "abm / simulation / environment",
+    meta: "research experiment setup",
+    health: { label: "On track · active" },
+    priority: "bars",
+    lead: "RO",
+    date: "Q2 2026",
+    status: { value: "3", variant: "gold" },
+  },
+];
+
 export function TagsView({ articles: _articles }: Props) {
   return (
     <LinearShell activeKeys={["views"]}>
@@ -32,43 +67,10 @@ export function TagsView({ articles: _articles }: Props) {
         primaryActionHref="/notice/"
       />
       <FilterRow />
-      <section className="projects-table" aria-label="Tags table">
-        <TableHead />
-        <QuarterRow label="Views" />
-        <ProjectRow
-          href="/news/"
-          dot="amber"
-          name="학과 / 개편 / AI"
-          meta="department transition signals"
-          health={{ label: "On track · active" }}
-          priority="muted"
-          lead="NS"
-          date="Q2 2026"
-          status={{ value: "3" }}
-        />
-        <ProjectRow
-          href="/useful-github/"
-          dot="cyan"
-          name="github / agent / claude"
-          meta="agent tooling resources"
-          health={{ label: "On track · active" }}
-          priority="bars"
-          lead="GT"
-          date="Q2 2026"
-          status={{ value: "3", variant: "blue" }}
-        />
-        <ProjectRow
-          href="/lab-skills/"
-          dot="green"
-          name="abm / simulation / environment"
-          meta="research experiment setup"
-          health={{ label: "On track · active" }}
-          priority="bars"
-          lead="RO"
-          date="Q2 2026"
-          status={{ value: "3", variant: "gold" }}
-        />
-      </section>
+      <SortableProjectsTable
+        groups={[{ label: "Views", rows: TAG_ROWS }]}
+        ariaLabel="Tags table"
+      />
     </LinearShell>
   );
 }

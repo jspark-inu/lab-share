@@ -70,7 +70,7 @@ export function LinearRail({
 
       <div className="nav-block">
         <p>Workspace</p>
-        <Link href="/news/" className={cls("initiatives")}>
+        <Link href="/notice/" className={cls("initiatives")}>
           <span className="nav-glyph">⌃</span>Initiatives
         </Link>
         <Link href="/" className={cls("projects")}>
@@ -82,7 +82,7 @@ export function LinearRail({
         <Link href="/authors/jspark-inu/" className={cls("teams")}>
           <span className="nav-glyph">▣</span>Teams
         </Link>
-        <Link href="/notice/" className={cls("more")}>
+        <Link href="/tags/" className={cls("more")}>
           <span className="nav-glyph">⋯</span>More
         </Link>
       </div>
