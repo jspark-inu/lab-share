@@ -1,5 +1,21 @@
+# MkDocs (legacy, removed in Phase 4)
 site/
 .venv/
 __pycache__/
 *.pyc
 .DS_Store
+
+# Next.js
+node_modules/
+.next/
+out/
+*.tsbuildinfo
+next-env.d.ts
+
+# OS / editor
+Thumbs.db
+.vscode/
+.idea/
+
+# Local env
+.env*.local
