@@ -22,21 +22,22 @@ export function ResourceMetaBox({ article }: Props) {
       style={{
         margin: "0 0 1.5rem 0",
         padding: "0.9rem 1.1rem",
-        border: "1px solid var(--border, #2a2d35)",
+        border: "1px solid var(--line)",
         borderRadius: 8,
-        background: "var(--surface-elevated, #1a1c22)",
+        background: "var(--soft)",
+        color: "var(--text)",
         fontSize: "0.92rem",
         lineHeight: 1.55,
       }}
     >
       {hasUrl ? (
         <div style={{ marginBottom: hasAttachments ? "0.6rem" : 0 }}>
-          <strong style={{ marginRight: 6 }}>↗ 외부 링크</strong>
+          <strong style={{ marginRight: 6, color: "var(--text)" }}>↗ 외부 링크</strong>
           <a
             href={article.source_url}
             target="_blank"
             rel="noopener noreferrer"
-            style={{ wordBreak: "break-all" }}
+            style={{ wordBreak: "break-all", color: "var(--blue)" }}
           >
             {article.source_url}
           </a>
@@ -44,11 +45,15 @@ export function ResourceMetaBox({ article }: Props) {
       ) : null}
       {hasAttachments ? (
         <div>
-          <strong style={{ marginRight: 6 }}>📎 첨부파일</strong>
+          <strong style={{ marginRight: 6, color: "var(--text)" }}>📎 첨부파일</strong>
           <ul style={{ margin: "0.3rem 0 0 0", paddingLeft: "1.4rem" }}>
             {article.attachments!.map((name) => (
               <li key={name}>
-                <a href={`/resources/files/${name}`} download>
+                <a
+                  href={`/resources/files/${name}`}
+                  download
+                  style={{ color: "var(--blue)" }}
+                >
                   {name}
                 </a>
               </li>
