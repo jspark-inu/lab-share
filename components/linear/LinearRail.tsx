@@ -2,13 +2,14 @@ import Link from "next/link";
 
 /**
  * Lab Ops Hub 사이드바 — 정직 라벨.
- * 디자인 SSOT(.linear-rail / .primary-nav / .nav-block / .nav-glyph / .team-chip 등)는 변경 0.
+ * 디자인 SSOT(.linear-rail / .primary-nav / .nav-block / .nav-glyph 등)는 변경 0.
  * 라벨 텍스트와 href 만 실제 사이트 구조와 1:1 매핑.
  *
- * 12개 슬롯:
+ * 9개 슬롯:
  *   Primary nav (3): Home / Recent / Updates
  *   Workspace block (6): Projects / Meetings / Skills / Wiki / Notice / Resources
- *   Your teams block (3): 김도현 / 이혜진 / 박경 (학생 칩 — Phase 2 학생 페이지 예약)
+ *
+ * (Your team 학생 칩 블록은 목적 미정으로 제거. 향후 재도입 시 .team-chip CSS 토큰 보존 중.)
  */
 export type RailNavKey =
   // Primary nav
@@ -21,11 +22,7 @@ export type RailNavKey =
   | "skills"
   | "wiki"
   | "notice"
-  | "resources"
-  // Your teams chips
-  | "student-do"
-  | "student-hye"
-  | "student-gyung";
+  | "resources";
 
 interface LinearRailProps {
   /** 활성 표시할 nav 키들 (보통 1개) */
@@ -94,19 +91,6 @@ export function LinearRail({
         </Link>
         <Link href="/resources/" className={cls("resources")}>
           <span className="nav-glyph">◫</span>Resources
-        </Link>
-      </div>
-
-      <div className="nav-block">
-        <p>Your team</p>
-        <Link href="/projects/" className={cls("student-do")}>
-          <span className="team-chip blue">도</span>김도현 <b>›</b>
-        </Link>
-        <Link href="/projects/" className={cls("student-hye")}>
-          <span className="team-chip purple">혜</span>이혜진 <b>›</b>
-        </Link>
-        <Link href="/projects/" className={cls("student-gyung")}>
-          <span className="team-chip mint">경</span>박경 <b>›</b>
         </Link>
       </div>
     </aside>
