@@ -14,7 +14,7 @@ export interface StudentTask {
 export interface ProjectRecord {
   id: string;
   title: string;
-  type: "project" | "meeting" | "skill" | "wiki" | "notice" | "task";
+  type: "project" | "meeting" | "skill" | "wiki" | "notice" | "task" | "resource";
   date: string;
   href?: string;
 }

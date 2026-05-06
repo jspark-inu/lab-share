@@ -22,18 +22,24 @@ export interface CategoryConfig {
   activeKeys: RailNavKey[];
 }
 
+/**
+ * 한 카테고리에서 다른 카테고리로 이동할 수 있는 탭 셋.
+ * 본인을 제외한 5개를 표시. notice/resources 는 quiet variant 로 약하게.
+ */
+const TAB_PROJECTS: TabSpec = { label: "Projects", href: "/projects/" };
+const TAB_MEETINGS: TabSpec = { label: "Meetings", href: "/meetings/" };
+const TAB_SKILLS: TabSpec = { label: "Skills", href: "/skills/" };
+const TAB_WIKI: TabSpec = { label: "Wiki", href: "/wiki/" };
+const TAB_NOTICE: TabSpec = { label: "Notice", href: "/notice/", variant: "quiet" };
+const TAB_RESOURCES: TabSpec = { label: "Resources", href: "/resources/", variant: "quiet" };
+
 export const CATEGORY_CONFIG: Record<CategorySlug, CategoryConfig> = {
   projects: {
     slug: "projects",
     pageTitle: "Projects",
     chromeTitle: "◇ Projects",
     activeTabLabel: "◇ All projects",
-    extraTabs: [
-      { label: "Meetings", href: "/meetings/" },
-      { label: "Skills", href: "/skills/" },
-      { label: "Wiki", href: "/wiki/" },
-      { label: "Notice", href: "/notice/", variant: "quiet" },
-    ],
+    extraTabs: [TAB_MEETINGS, TAB_SKILLS, TAB_WIKI, TAB_NOTICE, TAB_RESOURCES],
     primaryActionLabel: "＋ Track project",
     quarterLabel: "Active",
     ariaLabel: "Projects table",
@@ -44,12 +50,7 @@ export const CATEGORY_CONFIG: Record<CategorySlug, CategoryConfig> = {
     pageTitle: "Meetings",
     chromeTitle: "◇ Meetings",
     activeTabLabel: "◇ All meetings",
-    extraTabs: [
-      { label: "Projects", href: "/projects/" },
-      { label: "Skills", href: "/skills/" },
-      { label: "Wiki", href: "/wiki/" },
-      { label: "Notice", href: "/notice/", variant: "quiet" },
-    ],
+    extraTabs: [TAB_PROJECTS, TAB_SKILLS, TAB_WIKI, TAB_NOTICE, TAB_RESOURCES],
     primaryActionLabel: "＋ Add meeting",
     quarterLabel: "Recent",
     ariaLabel: "Meetings table",
@@ -60,12 +61,7 @@ export const CATEGORY_CONFIG: Record<CategorySlug, CategoryConfig> = {
     pageTitle: "Skills",
     chromeTitle: "◇ Skills",
     activeTabLabel: "◇ All skills",
-    extraTabs: [
-      { label: "Projects", href: "/projects/" },
-      { label: "Meetings", href: "/meetings/" },
-      { label: "Wiki", href: "/wiki/" },
-      { label: "Notice", href: "/notice/", variant: "quiet" },
-    ],
+    extraTabs: [TAB_PROJECTS, TAB_MEETINGS, TAB_WIKI, TAB_NOTICE, TAB_RESOURCES],
     primaryActionLabel: "＋ Share skill",
     quarterLabel: "Shared",
     ariaLabel: "Skills table",
@@ -76,12 +72,7 @@ export const CATEGORY_CONFIG: Record<CategorySlug, CategoryConfig> = {
     pageTitle: "Wiki",
     chromeTitle: "◇ Wiki",
     activeTabLabel: "◇ All entries",
-    extraTabs: [
-      { label: "Projects", href: "/projects/" },
-      { label: "Meetings", href: "/meetings/" },
-      { label: "Skills", href: "/skills/" },
-      { label: "Notice", href: "/notice/", variant: "quiet" },
-    ],
+    extraTabs: [TAB_PROJECTS, TAB_MEETINGS, TAB_SKILLS, TAB_NOTICE, TAB_RESOURCES],
     primaryActionLabel: "＋ New entry",
     quarterLabel: "Knowledge",
     ariaLabel: "Wiki table",
@@ -92,16 +83,22 @@ export const CATEGORY_CONFIG: Record<CategorySlug, CategoryConfig> = {
     pageTitle: "Notice",
     chromeTitle: "◇ Notice",
     activeTabLabel: "◇ All notices",
-    extraTabs: [
-      { label: "Projects", href: "/projects/" },
-      { label: "Meetings", href: "/meetings/" },
-      { label: "Skills", href: "/skills/" },
-      { label: "Wiki", href: "/wiki/", variant: "quiet" },
-    ],
+    extraTabs: [TAB_PROJECTS, TAB_MEETINGS, TAB_SKILLS, TAB_WIKI, TAB_RESOURCES],
     primaryActionLabel: "＋ Create notice",
     quarterLabel: "Active",
     ariaLabel: "Notice table",
     activeKeys: ["notice"],
+  },
+  resources: {
+    slug: "resources",
+    pageTitle: "Resources",
+    chromeTitle: "◫ Resources",
+    activeTabLabel: "◫ All resources",
+    extraTabs: [TAB_PROJECTS, TAB_MEETINGS, TAB_SKILLS, TAB_WIKI, TAB_NOTICE],
+    primaryActionLabel: "＋ Add resource",
+    quarterLabel: "Curated",
+    ariaLabel: "Resources table",
+    activeKeys: ["resources"],
   },
 };
 
@@ -111,4 +108,5 @@ export const CATEGORY_SLUGS: CategorySlug[] = [
   "skills",
   "wiki",
   "notice",
+  "resources",
 ];

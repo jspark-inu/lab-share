@@ -5,9 +5,9 @@ import Link from "next/link";
  * 디자인 SSOT(.linear-rail / .primary-nav / .nav-block / .nav-glyph / .team-chip 등)는 변경 0.
  * 라벨 텍스트와 href 만 실제 사이트 구조와 1:1 매핑.
  *
- * 11개 슬롯:
+ * 12개 슬롯:
  *   Primary nav (3): Home / Recent / Updates
- *   Workspace block (5): Projects / Meetings / Skills / Wiki / Notice
+ *   Workspace block (6): Projects / Meetings / Skills / Wiki / Notice / Resources
  *   Your teams block (3): 김도현 / 이혜진 / 박경 (학생 칩 — Phase 2 학생 페이지 예약)
  */
 export type RailNavKey =
@@ -21,6 +21,7 @@ export type RailNavKey =
   | "skills"
   | "wiki"
   | "notice"
+  | "resources"
   // Your teams chips
   | "student-do"
   | "student-hye"
@@ -90,6 +91,9 @@ export function LinearRail({
         </Link>
         <Link href="/notice/" className={cls("notice")}>
           <span className="nav-glyph">⋯</span>Notice
+        </Link>
+        <Link href="/resources/" className={cls("resources")}>
+          <span className="nav-glyph">◫</span>Resources
         </Link>
       </div>
 

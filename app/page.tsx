@@ -38,7 +38,8 @@ export default async function HomePage() {
           { label: "◇ All projects", href: "/", variant: "active" },
           { label: "Meetings", href: "/meetings/" },
           { label: "Skills", href: "/skills/" },
-          { label: "Wiki", href: "/wiki/", variant: "quiet" },
+          { label: "Wiki", href: "/wiki/" },
+          { label: "Resources", href: "/resources/", variant: "quiet" },
         ]}
         primaryActionLabel="＋ Track project"
         primaryActionHref="/projects/"

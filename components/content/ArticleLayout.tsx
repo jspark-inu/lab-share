@@ -2,6 +2,7 @@ import { LinearShell } from "@/components/linear/LinearShell";
 import { ProjectChrome } from "@/components/linear/ProjectChrome";
 import { ProjectTabs } from "@/components/linear/ProjectTabs";
 import { GiscusEmbed } from "./GiscusEmbed";
+import { ResourceMetaBox } from "./ResourceMetaBox";
 import { CATEGORY_CONFIG } from "@/lib/content/categories";
 import type { Article } from "@/lib/content/types";
 
@@ -36,6 +37,9 @@ export function ArticleLayout({ article, html }: Props) {
         primaryActionHref={`${article.href}#__comments`}
       />
       <article className="linear-article-page md-typeset">
+        {article.category === "resources" ? (
+          <ResourceMetaBox article={article} />
+        ) : null}
         <div
           className="linear-article-body"
           dangerouslySetInnerHTML={{ __html: html }}

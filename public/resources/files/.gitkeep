@@ -1,0 +1,5 @@
+# 자료실 첨부파일 폴더
+# 이 폴더에 PDF, 슬라이드, 예제 zip 등 첨부할 파일을 둡니다.
+# frontmatter `attachments: ["파일명.pdf"]` 로 글에 연결.
+# 빌드 시 정적 자산으로 그대로 /resources/files/ 경로에 서빙됩니다.
+# 단일 파일 50MB 이하 권장, 100MB 초과 시 GitHub 거부.

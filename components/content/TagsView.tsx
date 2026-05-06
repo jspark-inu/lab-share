@@ -17,6 +17,7 @@ const CATEGORY_DOT: Record<CategorySlug, DotColor> = {
   skills: "cyan",
   wiki: "green",
   notice: "indigo",
+  resources: "pink",
 };
 
 const CATEGORY_LABEL: Record<CategorySlug, string> = {
@@ -25,6 +26,7 @@ const CATEGORY_LABEL: Record<CategorySlug, string> = {
   skills: "Skills",
   wiki: "Wiki",
   notice: "Notice",
+  resources: "Resources",
 };
 
 /**

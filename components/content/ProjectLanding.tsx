@@ -107,6 +107,7 @@ function recordType(category: ArticleSummary["category"]): ProjectRecord["type"]
   if (category === "projects") return "project";
   if (category === "meetings") return "meeting";
   if (category === "skills") return "skill";
+  if (category === "resources") return "resource";
   return category;
 }
 
