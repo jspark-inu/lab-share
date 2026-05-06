@@ -11,7 +11,7 @@ attachments:
   - ch03-cold-email.pdf
 display:
   dot: pink
-  meta: "Ace the DS Interview · Ch 3"
+  meta: "Ch 3"
   health:
     label: 권장
   priority: muted
@@ -23,7 +23,7 @@ display:
 
 # 콜드 이메일로 꿈의 데이터 직무 잡기
 
-*Ace the Data Science Interview* Chapter 3. 채용 공고 자동지원이 아니라, 가고 싶은 회사의 데이터 팀에게 *직접 이메일 써서* 면접 기회를 만드는 법.
+Chapter 3. 채용 공고 자동지원이 아니라, 가고 싶은 회사의 데이터 팀에게 *직접 이메일 써서* 면접 기회를 만드는 법.
 
 ## 다루는 것
 

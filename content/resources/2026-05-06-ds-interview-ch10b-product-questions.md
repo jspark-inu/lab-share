@@ -11,7 +11,7 @@ attachments:
   - ch10b-product-questions.pdf
 display:
   dot: pink
-  meta: "Ace the DS Interview · Ch 10b"
+  meta: "Ch 10b"
   health:
     label: 권장
   priority: muted
@@ -23,7 +23,7 @@ display:
 
 # Ch 10b. Product Sense — 18개 실전 문제
 
-*Ace the Data Science Interview* Chapter 10 중 **실전 문제 파트**. 18개 product sense 면접 문제를 유형별로 정리.
+Chapter 10 중 **실전 문제 파트**. 18개 product sense 면접 문제를 유형별로 정리.
 
 ## 다루는 것 (문제 유형)
 

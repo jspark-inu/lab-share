@@ -11,7 +11,7 @@ attachments:
   - ch07b-ml-advanced.pdf
 display:
   dot: pink
-  meta: "Ace the DS Interview · Ch 7b"
+  meta: "Ch 7b"
   health:
     label: 권장
   priority: muted
@@ -23,7 +23,7 @@ display:
 
 # Ch 7b. 머신러닝 심화
 
-*Ace the Data Science Interview* Chapter 7 중 **심화 파트**. 7a를 본 후 면접에서 *변별력* 만들어주는 주제들.
+Chapter 7 중 **심화 파트**. 7a를 본 후 면접에서 *변별력* 만들어주는 주제들.
 
 ## 다루는 것
 

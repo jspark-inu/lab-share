@@ -11,7 +11,7 @@ attachments:
   - ch09a-coding-concepts.pdf
 display:
   dot: pink
-  meta: "Ace the DS Interview · Ch 9a"
+  meta: "Ch 9a"
   health:
     label: 권장
   priority: muted
@@ -23,7 +23,7 @@ display:
 
 # Chapter 9. Coding — 개념
 
-*Ace the Data Science Interview* Chapter 9 중 **개념 파트**. 데이터 직무 코딩 면접에서 알아야 할 자료구조·알고리즘 핵심.
+Chapter 9 중 **개념 파트**. 데이터 직무 코딩 면접에서 알아야 할 자료구조·알고리즘 핵심.
 
 ## 다루는 것
 

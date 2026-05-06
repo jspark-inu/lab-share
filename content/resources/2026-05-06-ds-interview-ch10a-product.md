@@ -11,7 +11,7 @@ attachments:
   - ch10a-product-frameworks.pdf
 display:
   dot: pink
-  meta: "Ace the DS Interview · Ch 10a"
+  meta: "Ch 10a"
   health:
     label: 권장
   priority: muted
@@ -23,7 +23,7 @@ display:
 
 # Chapter 10. Product Sense — 프레임워크
 
-*Ace the Data Science Interview* Chapter 10 중 **프레임워크 파트**. "이 기능 메트릭 어떻게 정할까요?" 같은 product sense 질문에 답하는 사고 틀.
+Chapter 10 중 **프레임워크 파트**. "이 기능 메트릭 어떻게 정할까요?" 같은 product sense 질문에 답하는 사고 틀.
 
 ## 다루는 것
 

@@ -11,7 +11,7 @@ attachments:
   - ch01-resume-principles.pdf
 display:
   dot: pink
-  meta: "Ace the DS Interview · Ch 1"
+  meta: "Ch 1"
   health:
     label: 권장
   priority: muted
@@ -23,7 +23,7 @@ display:
 
 # 데이터 사이언티스트 이력서 4대 원칙
 
-*Ace the Data Science Interview* 책의 Chapter 1을 슬라이드로 정리한 자료입니다. 이력서 한 장으로 면접 통과율을 좌우하는 핵심 원칙을 다룹니다.
+Chapter 1을 슬라이드로 정리한 자료입니다. 이력서 한 장으로 면접 통과율을 좌우하는 핵심 원칙을 다룹니다.
 
 ## 누가 봐야 하는가
 

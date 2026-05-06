@@ -11,7 +11,7 @@ attachments:
   - ch04-behavioral-interview.pdf
 display:
   dot: pink
-  meta: "Ace the DS Interview · Ch 4"
+  meta: "Ch 4"
   health:
     label: 권장
   priority: muted
@@ -23,7 +23,7 @@ display:
 
 # 행동면접 완전정복
 
-*Ace the Data Science Interview* Chapter 4. "최근에 어려웠던 프로젝트는?", "팀 갈등 어떻게 풀었어요?" 같은 행동면접(behavioral interview) 질문에 답하는 프레임.
+Chapter 4. "최근에 어려웠던 프로젝트는?", "팀 갈등 어떻게 풀었어요?" 같은 행동면접(behavioral interview) 질문에 답하는 프레임.
 
 ## 다루는 것
 

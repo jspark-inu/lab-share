@@ -11,7 +11,7 @@ attachments:
   - ch05-probability.pdf
 display:
   dot: pink
-  meta: "Ace the DS Interview · Ch 5"
+  meta: "Ch 5"
   health:
     label: 권장
   priority: muted
@@ -23,7 +23,7 @@ display:
 
 # Chapter 5. Probability
 
-*Ace the Data Science Interview* Chapter 5. 데이터 직무 면접에서 단골로 나오는 확률 문제 유형과 풀이 패턴.
+Chapter 5. 데이터 직무 면접에서 단골로 나오는 확률 문제 유형과 풀이 패턴.
 
 ## 다루는 것
 

@@ -11,7 +11,7 @@ attachments:
   - ch02-portfolio-projects.pdf
 display:
   dot: pink
-  meta: "Ace the DS Interview · Ch 2"
+  meta: "Ch 2"
   health:
     label: 권장
   priority: muted
@@ -23,7 +23,7 @@ display:
 
 # 킥애스 포트폴리오 프로젝트 만들기
 
-*Ace the Data Science Interview* Chapter 2. "그냥 한 번 해본 프로젝트"가 아니라 면접관이 *이거 더 듣고 싶다*고 말하게 만드는 포트폴리오를 만드는 법.
+Chapter 2. "그냥 한 번 해본 프로젝트"가 아니라 면접관이 *이거 더 듣고 싶다*고 말하게 만드는 포트폴리오를 만드는 법.
 
 ## 다루는 것
 

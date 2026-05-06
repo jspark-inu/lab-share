@@ -11,7 +11,7 @@ attachments:
   - ch08-sql-db-design.pdf
 display:
   dot: pink
-  meta: "Ace the DS Interview · Ch 8"
+  meta: "Ch 8"
   health:
     label: 권장
   priority: muted
@@ -23,7 +23,7 @@ display:
 
 # Ch 8. SQL & DB 설계
 
-*Ace the Data Science Interview* Chapter 8. 데이터 직무에서 *기본기 검증용*으로 거의 항상 나오는 SQL과 DB 설계 문제.
+Chapter 8. 데이터 직무에서 *기본기 검증용*으로 거의 항상 나오는 SQL과 DB 설계 문제.
 
 ## 다루는 것
 

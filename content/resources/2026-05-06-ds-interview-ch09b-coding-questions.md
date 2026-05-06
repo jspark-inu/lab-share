@@ -11,7 +11,7 @@ attachments:
   - ch09b-coding-questions.pdf
 display:
   dot: pink
-  meta: "Ace the DS Interview · Ch 9b"
+  meta: "Ch 9b"
   health:
     label: 권장
   priority: muted
@@ -23,7 +23,7 @@ display:
 
 # Ch 9b. 코딩 면접 문제
 
-*Ace the Data Science Interview* Chapter 9 중 **실전 문제 파트**. 데이터 직무에서 자주 나오는 코딩 문제 모음 + 풀이 전략.
+Chapter 9 중 **실전 문제 파트**. 데이터 직무에서 자주 나오는 코딩 문제 모음 + 풀이 전략.
 
 ## 다루는 것
 

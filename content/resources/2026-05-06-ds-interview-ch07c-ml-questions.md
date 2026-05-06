@@ -11,7 +11,7 @@ attachments:
   - ch07c-ml-questions.pdf
 display:
   dot: pink
-  meta: "Ace the DS Interview · Ch 7c"
+  meta: "Ch 7c"
   health:
     label: 권장
   priority: muted
@@ -23,7 +23,7 @@ display:
 
 # Ch 7c. 머신러닝 면접 문제 35개
 
-*Ace the Data Science Interview* Chapter 7 중 **실전 문제 파트**. 35개 면접 문제를 출제 기업별로 분석하고 풀이 전략을 제시.
+Chapter 7 중 **실전 문제 파트**. 35개 면접 문제를 출제 기업별로 분석하고 풀이 전략을 제시.
 
 ## 다루는 것
 

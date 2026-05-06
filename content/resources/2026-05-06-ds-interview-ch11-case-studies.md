@@ -11,7 +11,7 @@ attachments:
   - ch11-case-studies.pdf
 display:
   dot: pink
-  meta: "Ace the DS Interview · Ch 11"
+  meta: "Ch 11"
   health:
     label: 권장
   priority: muted
@@ -23,7 +23,7 @@ display:
 
 # Ch 11. Case Studies — 실전 케이스 스터디
 
-*Ace the Data Science Interview* Chapter 11. 앞의 1-10장에서 익힌 모든 도구를 *하나의 비즈니스 문제 풀이*에 통합 적용하는 capstone 챕터.
+Chapter 11. 앞의 1-10장에서 익힌 모든 도구를 *하나의 비즈니스 문제 풀이*에 통합 적용하는 capstone 챕터.
 
 ## 다루는 것
 

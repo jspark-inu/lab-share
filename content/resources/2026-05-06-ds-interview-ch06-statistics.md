@@ -11,7 +11,7 @@ attachments:
   - ch06-statistics.pdf
 display:
   dot: pink
-  meta: "Ace the DS Interview · Ch 6"
+  meta: "Ch 6"
   health:
     label: 권장
   priority: muted
@@ -23,7 +23,7 @@ display:
 
 # Ch 6. 통계학 (Statistics)
 
-*Ace the Data Science Interview* Chapter 6. 가설검정·신뢰구간·A/B 테스트·표본·편향 — 데이터 직무 면접에서 *가장 자주 나오는* 통계 영역.
+Chapter 6. 가설검정·신뢰구간·A/B 테스트·표본·편향 — 데이터 직무 면접에서 *가장 자주 나오는* 통계 영역.
 
 ## 다루는 것
 

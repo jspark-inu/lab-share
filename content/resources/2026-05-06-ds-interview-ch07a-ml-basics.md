@@ -11,7 +11,7 @@ attachments:
   - ch07a-ml-basics.pdf
 display:
   dot: pink
-  meta: "Ace the DS Interview · Ch 7a"
+  meta: "Ch 7a"
   health:
     label: 권장
   priority: muted
@@ -23,7 +23,7 @@ display:
 
 # Chapter 7. Machine Learning — 기초
 
-*Ace the Data Science Interview* Chapter 7 중 **기초 파트**. 머신러닝 면접의 80%를 차지하는 핵심 개념을 정리.
+Chapter 7 중 **기초 파트**. 머신러닝 면접의 80%를 차지하는 핵심 개념을 정리.
 
 ## 다루는 것
 
