@@ -1,6 +1,82 @@
 {
   "projects": [
     {
+      "slug": "ds-dept-job-board",
+      "priority": "high",
+      "health": "on-track",
+      "lead": "JS",
+      "targetDate": "2026-Q3",
+      "statusPct": 0,
+      "dot": "indigo",
+      "meta": "기획 단계 · 시드",
+      "tasks": [
+        {
+          "slug": "decide-implementation",
+          "title": "구현 형태 결정 — 별도 웹 vs lab-share 카테고리 vs 노션 vs 슬랙",
+          "horizon": "short",
+          "status": "active",
+          "priority": "high",
+          "owner": "JS",
+          "date": "2026-05-12",
+          "summary": "4 옵션 trade-off 비교 후 1개 선택. 학과 사람들이 가장 많이 이용할 형태가 무엇인지가 핵심.",
+          "done": [],
+          "next": [
+            "옵션별 setup time 과 운영 부담 정리.",
+            "교수 1명 + 행정조교 1명 + 학생 1명 의견 청취.",
+            "결정 후 이 프로젝트의 dot 색·target 갱신."
+          ]
+        },
+        {
+          "slug": "design-incentives",
+          "title": "인센티브 구조 설계 — 양방향 지속가능성",
+          "horizon": "short",
+          "status": "todo",
+          "priority": "high",
+          "owner": "JS",
+          "date": "2026-Q2",
+          "summary": "의뢰자(교수·행정)·풀이자(학생) 양쪽 인센티브와 학기 단위 평가·보상 메커니즘 정의.",
+          "done": [],
+          "next": [
+            "학점·장학금 연동 가능 범위 학과 행정에 확인.",
+            "포트폴리오 가치 → 채용 시 노출 방안 (학과 추천서 등).",
+            "우수작 학과 홍보·연차 보고서 활용 방안."
+          ]
+        },
+        {
+          "slug": "seed-problems",
+          "title": "시드 의뢰 1-2건 직접 등록",
+          "horizon": "short",
+          "status": "todo",
+          "priority": "medium",
+          "owner": "JS",
+          "date": "2026-05-19",
+          "summary": "박 교수님이 실제 풀고 싶었으나 시간 없었던 문제 1-2개를 첫 의뢰로 등록 → 의뢰 템플릿 검증 + 학생 진입 장벽 확인.",
+          "done": [],
+          "next": [
+            "후보 문제 3-5개 brainstorming.",
+            "행정조교 선생님 후보 문제 1건 청취.",
+            "의뢰 템플릿(제목·맥락·데이터·기대 결과·기한) 1차 안 작성."
+          ]
+        },
+        {
+          "slug": "mvp-launch",
+          "title": "첫 학기 MVP 운영 — 의뢰 5+ / 풀이 3+ / 발표회 1회",
+          "horizon": "medium",
+          "status": "todo",
+          "priority": "medium",
+          "owner": "JS",
+          "date": "2026-Q3",
+          "summary": "MVP 범위와 일정 확정. 첫 학기 운영을 통해 진짜 막히는 지점(예: 학생 모집·풀이 품질·심사 부담) 발견.",
+          "done": [],
+          "next": [
+            "학기 캘린더 — 의뢰 모집·풀이 기간·발표회 일정 확정.",
+            "심사 기준 초안 (재현성·임팩트·발표 명료성).",
+            "학과 공지 채널 정하기."
+          ]
+        }
+      ]
+    },
+    {
       "slug": "sample-project",
       "priority": "medium",
       "health": "on-track",
