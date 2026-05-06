@@ -1,182 +1,26 @@
 {
   "projects": [
     {
-      "slug": "lab-ops-hub",
-      "priority": "high",
+      "slug": "sample-project",
+      "priority": "medium",
       "health": "on-track",
       "lead": "JS",
       "targetDate": "2026-Q2",
-      "statusPct": 35,
+      "statusPct": 0,
       "dot": "orange",
-      "meta": "Lab platform · Phase 1",
+      "meta": "예시 · 첫 시작점",
       "tasks": [
         {
-          "slug": "section-identity",
-          "title": "5 section identity: Projects / Meetings / Skills / Wiki / Notice",
-          "horizon": "short",
-          "status": "active",
-          "priority": "high",
-          "owner": "JS",
-          "date": "2026-04-30",
-          "summary": "Reframe the site as a lab operations hub rather than a flat article catalog.",
-          "done": ["Projects became the primary workspace surface.", "Meetings, Skills, Wiki, and Notice were kept as related knowledge areas."],
-          "next": ["Connect student-facing project tasks to this project page."]
-        },
-        {
-          "slug": "sidebar-labels",
-          "title": "Make sidebar labels honest",
+          "slug": "sample-task",
+          "title": "Sample task — 첫 할 일",
           "horizon": "short",
           "status": "todo",
           "priority": "medium",
           "owner": "JS",
-          "date": "2026-04-30",
-          "summary": "Keep navigation labels aligned with the real use of each area.",
+          "date": "2026-05-06",
+          "summary": "이 항목은 task 라우팅이 작동하는지 확인하는 예시입니다. 실제 프로젝트 추가 시 이 entry 통째로 교체.",
           "done": [],
-          "next": ["Review student wording after the first use."]
-        },
-        {
-          "slug": "student-project-board",
-          "title": "Replace dummy project rows with real project records",
-          "horizon": "short",
-          "status": "active",
-          "priority": "high",
-          "owner": "JS",
-          "date": "2026-04-30",
-          "summary": "Move project properties into a relational JSON source and render Home from it.",
-          "done": ["Added project-db.json as the current structured source."],
-          "next": ["Add student editing flow via GitHub OAuth/PR."]
-        },
-        {
-          "slug": "student-input-flow",
-          "title": "Student input form + GitHub OAuth + PR automation",
-          "horizon": "medium",
-          "status": "todo",
-          "priority": "high",
-          "owner": "JS",
-          "date": "2026-Q2",
-          "summary": "Let students submit task updates without touching the repository directly.",
-          "done": [],
-          "next": ["Define the minimal task update schema."]
-        },
-        {
-          "slug": "meeting-action-sync",
-          "title": "Extract meeting actions into project tasks",
-          "horizon": "long",
-          "status": "todo",
-          "priority": "medium",
-          "owner": "JS",
-          "date": "2026-Q3",
-          "summary": "Turn meeting records into task and status updates.",
-          "done": [],
-          "next": ["Keep meeting tags aligned with project slugs."]
-        }
-      ]
-    },
-    {
-      "slug": "student-mentoring",
-      "priority": "high",
-      "health": "on-track",
-      "lead": "JS",
-      "targetDate": "2026-Q2",
-      "statusPct": 25,
-      "dot": "green",
-      "meta": "Student growth system",
-      "tasks": [
-        {
-          "slug": "weekly-update-format",
-          "title": "Agree on weekly update format",
-          "horizon": "short",
-          "status": "active",
-          "priority": "high",
-          "owner": "JS",
-          "date": "2026-04-30",
-          "summary": "Define the smallest useful student update template.",
-          "done": ["Connected HAI Slack research channel."],
-          "next": ["Ask students which format feels least burdensome."]
-        },
-        {
-          "slug": "student-rows",
-          "title": "Register student rows in Lab Ops Hub",
-          "horizon": "short",
-          "status": "todo",
-          "priority": "medium",
-          "owner": "JS",
-          "date": "2026-Q2",
-          "summary": "Represent each student as an accountable work stream.",
-          "done": [],
-          "next": ["Map student names to GitHub IDs."]
-        }
-      ]
-    },
-    {
-      "slug": "hai-lab-infra",
-      "priority": "medium",
-      "health": "at-risk",
-      "lead": "JS",
-      "targetDate": "2026-Q2",
-      "statusPct": 45,
-      "dot": "cyan",
-      "meta": "hai_1 · hai_2",
-      "tasks": [
-        {
-          "slug": "heartbeat",
-          "title": "Stabilize hai_1 / hai_2 heartbeat",
-          "horizon": "short",
-          "status": "active",
-          "priority": "high",
-          "owner": "JS",
-          "date": "2026-Q2",
-          "summary": "Make the lab infrastructure visibly alive and debuggable.",
-          "done": [],
-          "next": ["Expose last sync and failure states in the hub."]
-        }
-      ]
-    },
-    {
-      "slug": "research-service-recovery",
-      "priority": "medium",
-      "health": "on-track",
-      "lead": "JS",
-      "targetDate": "2026-Q3",
-      "statusPct": 20,
-      "dot": "indigo",
-      "meta": "Service recovery research",
-      "tasks": [
-        {
-          "slug": "literature-map",
-          "title": "Build service recovery literature map",
-          "horizon": "medium",
-          "status": "todo",
-          "priority": "medium",
-          "owner": "JS",
-          "date": "2026-Q3",
-          "summary": "Collect papers, mechanisms, and candidate constructs in one project trail.",
-          "done": [],
-          "next": ["Link paper notes by tag."]
-        }
-      ]
-    },
-    {
-      "slug": "research-abm-meta",
-      "priority": "low",
-      "health": "paused",
-      "lead": "JS",
-      "targetDate": "2026-Q3",
-      "statusPct": 10,
-      "dot": "amber",
-      "meta": "ABM meta research",
-      "tasks": [
-        {
-          "slug": "model-patterns",
-          "title": "Collect reusable ABM model patterns",
-          "horizon": "long",
-          "status": "todo",
-          "priority": "low",
-          "owner": "JS",
-          "date": "2026-Q3",
-          "summary": "Track reusable patterns for simulation research.",
-          "done": [],
-          "next": ["Connect relevant skills posts."]
+          "next": ["진짜 프로젝트 첫 task 정의."]
         }
       ]
     }
