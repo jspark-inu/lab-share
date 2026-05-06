@@ -33,6 +33,7 @@ export default async function ProjectsIndexPage() {
         tabs={[
           { label: config.pageTitle, href: "/projects/", variant: "strong" },
           { label: config.activeTabLabel, href: "/projects/", variant: "active" },
+          { label: "Home", href: "/" },
           ...config.extraTabs,
         ]}
         primaryActionLabel={config.primaryActionLabel}
