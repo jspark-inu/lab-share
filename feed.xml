@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Lab Share — HAI Lab</title>
+    <link>https://lab.haiinu.com</link>
+    <description>인천대 HAI 연구실 내부 지식 공유와 프로젝트 운영 허브</description>
+    <language>ko</language>
+    <lastBuildDate>Wed, 06 May 2026 15:00:00 GMT</lastBuildDate>
+    <atom:link href="https://lab.haiinu.com/feed.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>데이터과학과 인력사무소</title>
+      <link>https://lab.haiinu.com/projects/ds-dept-job-board/</link>
+      <guid isPermaLink="true">https://lab.haiinu.com/projects/ds-dept-job-board/</guid>
+      <pubDate>Wed, 06 May 2026 15:00:00 GMT</pubDate>
+      <category>Projects</category>
+    </item>
+    <item>
+      <title>Superpowers — 코딩 에이전트가 먼저 묻고 그다음에 짜게 하는 메타 스킬</title>
+      <link>https://lab.haiinu.com/skills/2026-05-07-superpowers/</link>
+      <guid isPermaLink="true">https://lab.haiinu.com/skills/2026-05-07-superpowers/</guid>
+      <pubDate>Wed, 06 May 2026 15:00:00 GMT</pubDate>
+      <category>Skills</category>
+    </item>
+    <item>
+      <title>gstack — Garry Tan의 슬래시 커맨드 23개로 혼자 팀처럼 일하기</title>
+      <link>https://lab.haiinu.com/skills/2026-05-07-gstack/</link>
+      <guid isPermaLink="true">https://lab.haiinu.com/skills/2026-05-07-gstack/</guid>
+      <pubDate>Wed, 06 May 2026 15:00:00 GMT</pubDate>
+      <category>Skills</category>
+    </item>
+    <item>
+      <title>AI Research SKILLs — 아이디어부터 논문까지 자동화하는 98개 연구 스킬</title>
+      <link>https://lab.haiinu.com/skills/2026-05-07-ai-research-skills/</link>
+      <guid isPermaLink="true">https://lab.haiinu.com/skills/2026-05-07-ai-research-skills/</guid>
+      <pubDate>Wed, 06 May 2026 15:00:00 GMT</pubDate>
+      <category>Skills</category>
+    </item>
+    <item>
+      <title>Sample Project — 예시 프로젝트</title>
+      <link>https://lab.haiinu.com/projects/sample-project/</link>
+      <guid isPermaLink="true">https://lab.haiinu.com/projects/sample-project/</guid>
+      <pubDate>Tue, 05 May 2026 15:00:00 GMT</pubDate>
+      <category>Projects</category>
+    </item>
+    <item>
+      <title>자료실 사용법 — 외부 링크와 첨부파일 올리는 법</title>
+      <link>https://lab.haiinu.com/resources/2026-05-06-자료실-사용법/</link>
+      <guid isPermaLink="true">https://lab.haiinu.com/resources/2026-05-06-자료실-사용법/</guid>
+      <pubDate>Tue, 05 May 2026 15:00:00 GMT</pubDate>
+      <category>Resources</category>
+    </item>
+    <item>
+      <title>Sample Wiki — 예시 위키 항목</title>
+      <link>https://lab.haiinu.com/wiki/2026-05-06-sample-wiki/</link>
+      <guid isPermaLink="true">https://lab.haiinu.com/wiki/2026-05-06-sample-wiki/</guid>
+      <pubDate>Tue, 05 May 2026 15:00:00 GMT</pubDate>
+      <category>Wiki</category>
+    </item>
+    <item>
+      <title>Sample Skill — 예시 스킬</title>
+      <link>https://lab.haiinu.com/skills/2026-05-06-sample-skill/</link>
+      <guid isPermaLink="true">https://lab.haiinu.com/skills/2026-05-06-sample-skill/</guid>
+      <pubDate>Tue, 05 May 2026 15:00:00 GMT</pubDate>
+      <category>Skills</category>
+    </item>
+    <item>
+      <title>Sample Notice — 예시 공지</title>
+      <link>https://lab.haiinu.com/notice/2026-05-06-sample-notice/</link>
+      <guid isPermaLink="true">https://lab.haiinu.com/notice/2026-05-06-sample-notice/</guid>
+      <pubDate>Tue, 05 May 2026 15:00:00 GMT</pubDate>
+      <category>Notice</category>
+    </item>
+    <item>
+      <title>Sample Meeting — 예시 회의록</title>
+      <link>https://lab.haiinu.com/meetings/2026-05-06-sample-meeting/</link>
+      <guid isPermaLink="true">https://lab.haiinu.com/meetings/2026-05-06-sample-meeting/</guid>
+      <pubDate>Tue, 05 May 2026 15:00:00 GMT</pubDate>
+      <category>Meetings</category>
+    </item>
+    <item>
+      <title>Ch 11. Case Studies — End-to-End 케이스 스터디</title>
+      <link>https://lab.haiinu.com/resources/2026-05-06-ds-interview-ch11-case-studies/</link>
+      <guid isPermaLink="true">https://lab.haiinu.com/resources/2026-05-06-ds-interview-ch11-case-studies/</guid>
+      <pubDate>Tue, 05 May 2026 15:00:00 GMT</pubDate>
+      <category>Resources</category>
+    </item>
+    <item>
+      <title>Ch 10b. Product Sense — 18개 실전 문제</title>
+      <link>https://lab.haiinu.com/resources/2026-05-06-ds-interview-ch10b-product-questions/</link>
+      <guid isPermaLink="true">https://lab.haiinu.com/resources/2026-05-06-ds-interview-ch10b-product-questions/</guid>
+      <pubDate>Tue, 05 May 2026 15:00:00 GMT</pubDate>
+      <category>Resources</category>
+    </item>
+    <item>
+      <title>Ch 10a. Product Sense — 프레임워크</title>
+      <link>https://lab.haiinu.com/resources/2026-05-06-ds-interview-ch10a-product/</link>
+      <guid isPermaLink="true">https://lab.haiinu.com/resources/2026-05-06-ds-interview-ch10a-product/</guid>
+      <pubDate>Tue, 05 May 2026 15:00:00 GMT</pubDate>
+      <category>Resources</category>
+    </item>
+    <item>
+      <title>Ch 9b. 코딩 면접 문제</title>
+      <link>https://lab.haiinu.com/resources/2026-05-06-ds-interview-ch09b-coding-questions/</link>
+      <guid isPermaLink="true">https://lab.haiinu.com/resources/2026-05-06-ds-interview-ch09b-coding-questions/</guid>
+      <pubDate>Tue, 05 May 2026 15:00:00 GMT</pubDate>
+      <category>Resources</category>
+    </item>
+    <item>
+      <title>Ch 9a. 코딩 개념 (Coding Concepts)</title>
+      <link>https://lab.haiinu.com/resources/2026-05-06-ds-interview-ch09a-coding-concepts/</link>
+      <guid isPermaLink="true">https://lab.haiinu.com/resources/2026-05-06-ds-interview-ch09a-coding-concepts/</guid>
+      <pubDate>Tue, 05 May 2026 15:00:00 GMT</pubDate>
+      <category>Resources</category>
+    </item>
+    <item>
+      <title>Ch 8. SQL &amp; DB 설계</title>
+      <link>https://lab.haiinu.com/resources/2026-05-06-ds-interview-ch08-sql/</link>
+      <guid isPermaLink="true">https://lab.haiinu.com/resources/2026-05-06-ds-interview-ch08-sql/</guid>
+      <pubDate>Tue, 05 May 2026 15:00:00 GMT</pubDate>
+      <category>Resources</category>
+    </item>
+    <item>
+      <title>Ch 7c. 머신러닝 면접 문제 35개</title>
+      <link>https://lab.haiinu.com/resources/2026-05-06-ds-interview-ch07c-ml-questions/</link>
+      <guid isPermaLink="true">https://lab.haiinu.com/resources/2026-05-06-ds-interview-ch07c-ml-questions/</guid>
+      <pubDate>Tue, 05 May 2026 15:00:00 GMT</pubDate>
+      <category>Resources</category>
+    </item>
+    <item>
+      <title>Ch 7b. 머신러닝 심화 (ML Advanced)</title>
+      <link>https://lab.haiinu.com/resources/2026-05-06-ds-interview-ch07b-ml-advanced/</link>
+      <guid isPermaLink="true">https://lab.haiinu.com/resources/2026-05-06-ds-interview-ch07b-ml-advanced/</guid>
+      <pubDate>Tue, 05 May 2026 15:00:00 GMT</pubDate>
+      <category>Resources</category>
+    </item>
+    <item>
+      <title>Ch 7a. 머신러닝 기초 (ML Basics)</title>
+      <link>https://lab.haiinu.com/resources/2026-05-06-ds-interview-ch07a-ml-basics/</link>
+      <guid isPermaLink="true">https://lab.haiinu.com/resources/2026-05-06-ds-interview-ch07a-ml-basics/</guid>
+      <pubDate>Tue, 05 May 2026 15:00:00 GMT</pubDate>
+      <category>Resources</category>
+    </item>
+    <item>
+      <title>Ch 6. 통계학 (Statistics)</title>
+      <link>https://lab.haiinu.com/resources/2026-05-06-ds-interview-ch06-statistics/</link>
+      <guid isPermaLink="true">https://lab.haiinu.com/resources/2026-05-06-ds-interview-ch06-statistics/</guid>
+      <pubDate>Tue, 05 May 2026 15:00:00 GMT</pubDate>
+      <category>Resources</category>
+    </item>
+    <item>
+      <title>Ch 5. 확률 (Probability)</title>
+      <link>https://lab.haiinu.com/resources/2026-05-06-ds-interview-ch05-probability/</link>
+      <guid isPermaLink="true">https://lab.haiinu.com/resources/2026-05-06-ds-interview-ch05-probability/</guid>
+      <pubDate>Tue, 05 May 2026 15:00:00 GMT</pubDate>
+      <category>Resources</category>
+    </item>
+    <item>
+      <title>Ch 4. 행동면접 완전정복</title>
+      <link>https://lab.haiinu.com/resources/2026-05-06-ds-interview-ch04-behavioral/</link>
+      <guid isPermaLink="true">https://lab.haiinu.com/resources/2026-05-06-ds-interview-ch04-behavioral/</guid>
+      <pubDate>Tue, 05 May 2026 15:00:00 GMT</pubDate>
+      <category>Resources</category>
+    </item>
+    <item>
+      <title>Ch 3. 콜드 이메일로 꿈의 데이터 직무 잡기</title>
+      <link>https://lab.haiinu.com/resources/2026-05-06-ds-interview-ch03-cold-email/</link>
+      <guid isPermaLink="true">https://lab.haiinu.com/resources/2026-05-06-ds-interview-ch03-cold-email/</guid>
+      <pubDate>Tue, 05 May 2026 15:00:00 GMT</pubDate>
+      <category>Resources</category>
+    </item>
+    <item>
+      <title>Ch 2. 킥애스 포트폴리오 프로젝트 만들기</title>
+      <link>https://lab.haiinu.com/resources/2026-05-06-ds-interview-ch02-portfolio/</link>
+      <guid isPermaLink="true">https://lab.haiinu.com/resources/2026-05-06-ds-interview-ch02-portfolio/</guid>
+      <pubDate>Tue, 05 May 2026 15:00:00 GMT</pubDate>
+      <category>Resources</category>
+    </item>
+    <item>
+      <title>Ch 1. 데이터 사이언티스트 이력서 4대 원칙</title>
+      <link>https://lab.haiinu.com/resources/2026-05-06-ds-interview-ch01-resume/</link>
+      <guid isPermaLink="true">https://lab.haiinu.com/resources/2026-05-06-ds-interview-ch01-resume/</guid>
+      <pubDate>Tue, 05 May 2026 15:00:00 GMT</pubDate>
+      <category>Resources</category>
+    </item>
+  </channel>
+</rss>
