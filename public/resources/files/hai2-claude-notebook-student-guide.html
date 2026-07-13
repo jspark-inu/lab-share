@@ -1,0 +1,754 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HAI 연구실 Claude Notebook 시작 가이드</title>
+  <style>
+    :root {
+      --ink: #152033;
+      --muted: #5d6a7e;
+      --line: #d7deea;
+      --paper: #ffffff;
+      --soft: #f3f6fa;
+      --navy: #172a46;
+      --blue: #1967d2;
+      --teal: #007f78;
+      --amber: #b55b00;
+      --red: #b42318;
+      --blue-soft: #eaf2ff;
+      --teal-soft: #e6f6f3;
+      --amber-soft: #fff3df;
+      --red-soft: #ffebe8;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #dfe5ed;
+      color: var(--ink);
+      font-family: "Apple SD Gothic Neo", "AppleGothic", "Noto Sans KR", sans-serif;
+      font-size: 10.3pt;
+      line-height: 1.55;
+      word-break: keep-all;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    @page { size: A4; margin: 0; }
+
+    .page {
+      position: relative;
+      width: 210mm;
+      height: 297mm;
+      margin: 10mm auto;
+      padding: 15mm 16mm 14mm;
+      overflow: hidden;
+      background: var(--paper);
+      box-shadow: 0 8px 28px rgba(21, 32, 51, 0.13);
+      page-break-after: always;
+    }
+
+    .page:last-child { page-break-after: auto; }
+
+    @media print {
+      html, body { background: white; }
+      .page { margin: 0; box-shadow: none; }
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+    h1 { margin-bottom: 7mm; font-size: 31pt; line-height: 1.12; letter-spacing: -0.035em; }
+    h2 { margin-bottom: 5mm; font-size: 20pt; line-height: 1.2; letter-spacing: -0.025em; color: var(--navy); }
+    h3 { margin-bottom: 2.5mm; font-size: 12.7pt; line-height: 1.3; color: var(--navy); }
+    p { margin-bottom: 3.2mm; }
+
+    a { color: var(--blue); text-decoration: none; border-bottom: 1px solid #9ab9e8; }
+    strong { color: #0e1b2d; }
+    code, pre {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      word-break: break-all;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 2.2mm;
+      margin-bottom: 8mm;
+      color: var(--blue);
+      font-size: 9pt;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 7mm;
+      height: 1.2mm;
+      background: var(--blue);
+      border-radius: 1mm;
+    }
+
+    .subtitle {
+      max-width: 147mm;
+      margin-bottom: 9mm;
+      color: var(--muted);
+      font-size: 14pt;
+      line-height: 1.55;
+    }
+
+    .lead {
+      color: #304158;
+      font-size: 11.3pt;
+      line-height: 1.65;
+    }
+
+    .kicker {
+      margin-bottom: 2mm;
+      color: var(--blue);
+      font-size: 8.4pt;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10mm;
+      margin-bottom: 6mm;
+      padding-bottom: 4.5mm;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section-head h2 { margin-bottom: 0; }
+
+    .page-no {
+      min-width: 13mm;
+      color: #8a96a8;
+      font-size: 9pt;
+      font-weight: 700;
+      text-align: right;
+    }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4mm; }
+
+    .card {
+      padding: 5mm;
+      border: 1px solid var(--line);
+      border-radius: 4mm;
+      background: white;
+      break-inside: avoid;
+    }
+
+    .card.soft { background: var(--soft); border-color: transparent; }
+    .card.blue { background: var(--blue-soft); border-color: #bfd5f7; }
+    .card.teal { background: var(--teal-soft); border-color: #acdcd5; }
+    .card.amber { background: var(--amber-soft); border-color: #f1d09b; }
+    .card.red { background: var(--red-soft); border-color: #efb5ae; }
+    .card p:last-child, .callout p:last-child { margin-bottom: 0; }
+
+    .step-card {
+      position: relative;
+      min-height: 43mm;
+      padding-top: 14mm;
+    }
+
+    .step-num {
+      position: absolute;
+      top: 4.5mm;
+      left: 5mm;
+      display: grid;
+      width: 7mm;
+      height: 7mm;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--navy);
+      color: white;
+      font-size: 8.5pt;
+      font-weight: 800;
+    }
+
+    .callout {
+      margin: 5mm 0;
+      padding: 4.5mm 5mm;
+      border-left: 1.4mm solid var(--blue);
+      border-radius: 1.5mm 4mm 4mm 1.5mm;
+      background: var(--blue-soft);
+      break-inside: avoid;
+    }
+
+    .callout.warning { border-left-color: var(--amber); background: var(--amber-soft); }
+    .callout.danger { border-left-color: var(--red); background: var(--red-soft); }
+    .callout.success { border-left-color: var(--teal); background: var(--teal-soft); }
+
+    .address-box {
+      margin: 7mm 0 8mm;
+      padding: 5mm 6mm;
+      border: 1px solid #adc9f1;
+      border-radius: 4mm;
+      background: var(--blue-soft);
+    }
+
+    .address-box .label {
+      margin-bottom: 1.5mm;
+      color: var(--blue);
+      font-size: 8.5pt;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+    }
+
+    .address-box code {
+      color: #0f3f80;
+      font-size: 11.4pt;
+      font-weight: 700;
+    }
+
+    .code-block {
+      margin: 3mm 0 5mm;
+      padding: 4mm 4.5mm;
+      border-radius: 3mm;
+      background: #132238;
+      color: #eaf2ff;
+      font-size: 9.2pt;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      break-inside: avoid;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      margin: 0 1.5mm 1.5mm 0;
+      padding: 1.1mm 2.6mm;
+      border-radius: 999px;
+      background: var(--soft);
+      color: #415069;
+      font-size: 8.2pt;
+      font-weight: 700;
+    }
+
+    .pill.good { background: var(--teal-soft); color: #00655f; }
+    .pill.warn { background: var(--amber-soft); color: #8b4805; }
+
+    ul, ol { margin: 0 0 4mm; padding-left: 5.5mm; }
+    li { margin-bottom: 1.7mm; }
+    li::marker { color: var(--blue); font-weight: 800; }
+
+    .check-list { list-style: none; padding-left: 0; }
+    .check-list li {
+      position: relative;
+      min-height: 6mm;
+      padding-left: 8mm;
+      margin-bottom: 2.5mm;
+    }
+    .check-list li::before {
+      content: "";
+      position: absolute;
+      top: 0.6mm;
+      left: 0;
+      width: 4.5mm;
+      height: 4.5mm;
+      border: 1.2px solid #92a0b3;
+      border-radius: 1mm;
+      background: white;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 3mm 0 5mm;
+      font-size: 9.3pt;
+      break-inside: avoid;
+    }
+    th, td {
+      padding: 3mm 3.4mm;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+      text-align: left;
+    }
+    th { background: var(--soft); color: #31425a; font-weight: 800; }
+    td:first-child { width: 30%; font-weight: 700; color: #2b3a50; }
+
+    .route {
+      display: grid;
+      grid-template-columns: 1fr auto 1.15fr auto 1fr;
+      align-items: center;
+      gap: 2.2mm;
+      margin: 7mm 0;
+    }
+
+    .route-node {
+      min-height: 25mm;
+      display: grid;
+      align-content: center;
+      padding: 3.5mm;
+      border: 1px solid var(--line);
+      border-radius: 3.5mm;
+      background: white;
+      text-align: center;
+      font-weight: 800;
+    }
+
+    .route-node small { display: block; margin-top: 1mm; color: var(--muted); font-weight: 500; }
+    .route-arrow { color: var(--blue); font-size: 16pt; font-weight: 800; }
+
+    .mock-window {
+      margin: 5mm 0 6mm;
+      overflow: hidden;
+      border: 1px solid #b9c4d3;
+      border-radius: 4mm;
+      background: white;
+      box-shadow: 0 3mm 8mm rgba(23, 42, 70, 0.08);
+    }
+
+    .mock-bar {
+      display: flex;
+      align-items: center;
+      gap: 3mm;
+      min-height: 15mm;
+      padding: 3mm 4mm;
+      background: #172a46;
+      color: white;
+    }
+
+    .mock-brand { margin-right: auto; font-size: 9pt; font-weight: 800; letter-spacing: 0.03em; }
+    .mock-button {
+      padding: 1.7mm 3mm;
+      border: 1px solid rgba(255,255,255,0.28);
+      border-radius: 2mm;
+      background: rgba(255,255,255,0.09);
+      font-size: 8pt;
+      font-weight: 700;
+    }
+
+    .mock-button.active { background: #eaf2ff; color: #174d91; border-color: #eaf2ff; }
+    .mock-body { display: grid; grid-template-columns: 35mm 1fr; min-height: 43mm; }
+    .mock-tabs { padding: 4mm; background: var(--soft); border-right: 1px solid var(--line); color: #536176; font-size: 8.5pt; }
+    .mock-content { display: grid; place-items: center; padding: 7mm; color: #6b778b; text-align: center; }
+
+    .do-dont { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; }
+    .do-dont h3 { display: flex; align-items: center; gap: 2mm; }
+    .mark {
+      display: inline-grid;
+      width: 6mm;
+      height: 6mm;
+      place-items: center;
+      border-radius: 50%;
+      color: white;
+      font-size: 8pt;
+      font-weight: 900;
+    }
+    .mark.ok { background: var(--teal); }
+    .mark.no { background: var(--red); }
+
+    .trouble td:first-child { width: 27%; }
+    .trouble td:nth-child(2) { width: 34%; }
+
+    .footer {
+      position: absolute;
+      z-index: 10;
+      right: 16mm;
+      bottom: 8mm;
+      left: 16mm;
+      display: flex;
+      justify-content: space-between;
+      padding-top: 2.5mm;
+      border-top: 1px solid var(--line);
+      background: var(--paper);
+      color: #7a879a;
+      font-size: 7.8pt;
+    }
+
+    .cover {
+      background:
+        linear-gradient(90deg, #172a46 0 4mm, transparent 4mm),
+        #ffffff;
+    }
+
+    .cover-mark {
+      position: absolute;
+      top: 16mm;
+      right: 16mm;
+      width: 23mm;
+      height: 23mm;
+      display: grid;
+      place-items: center;
+      border: 1.5mm solid #d7e5fa;
+      border-radius: 7mm;
+      color: var(--blue);
+      font-size: 16pt;
+      font-weight: 900;
+    }
+
+    .cover .eyebrow { margin-top: 12mm; }
+    .cover h1 { max-width: 150mm; }
+    .cover-bottom {
+      position: absolute;
+      right: 16mm;
+      bottom: 17mm;
+      left: 16mm;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 12mm;
+    }
+
+    .doc-meta { color: var(--muted); font-size: 8.7pt; }
+    .doc-meta strong { display: block; margin-bottom: 1mm; font-size: 10pt; }
+
+    .tiny { color: var(--muted); font-size: 8.2pt; }
+    .mb-0 { margin-bottom: 0 !important; }
+    .mb-2 { margin-bottom: 2mm !important; }
+    .mt-5 { margin-top: 5mm; }
+  </style>
+</head>
+<body>
+
+  <section class="page cover">
+    <div class="cover-mark">HAI</div>
+    <div class="eyebrow">Student Access Guide</div>
+    <h1>HAI 연구실<br>Claude Notebook<br>시작 가이드</h1>
+    <p class="subtitle">Tailscale로 <strong>hai_2 공동 작업 환경</strong>에 접속해 파일을 만들고, 터미널과 Claude Code를 사용하는 학생용 안내서입니다.</p>
+
+    <div class="address-box">
+      <div class="label">CLAUDE NOTEBOOK 주소</div>
+      <code>http://100.116.76.42:8891/claude-notebook</code>
+    </div>
+
+    <div class="grid-3">
+      <div class="card step-card soft">
+        <span class="step-num">1</span>
+        <h3>Tailscale 연결</h3>
+        <p class="tiny">초대받은 이메일로 로그인합니다.</p>
+      </div>
+      <div class="card step-card soft">
+        <span class="step-num">2</span>
+        <h3>토큰 확인</h3>
+        <p class="tiny">SSH 명령 한 줄로 공동 토큰을 확인합니다.</p>
+      </div>
+      <div class="card step-card soft">
+        <span class="step-num">3</span>
+        <h3>Notebook 시작</h3>
+        <p class="tiny">브라우저 로그인 후 작업 폴더에서 시작합니다.</p>
+      </div>
+    </div>
+
+    <div class="callout success mt-5">
+      <strong>SSH 터널 창은 필요 없습니다.</strong><br>
+      Tailscale이 연결된 동안 위 주소를 브라우저에서 바로 열면 됩니다.
+    </div>
+
+    <div class="cover-bottom">
+      <div class="doc-meta">
+        <strong>HAI 연구실 내부 배포용</strong>
+        학생용 · 공동 작업 환경
+      </div>
+      <div class="doc-meta" style="text-align:right">
+        Version 1.0<br>
+        2026년 7월 13일
+      </div>
+    </div>
+  </section>
+
+  <section class="page">
+    <div class="section-head">
+      <div>
+        <div class="kicker">Before you start</div>
+        <h2>시작 전에 준비할 것</h2>
+      </div>
+      <div class="page-no">02</div>
+    </div>
+
+    <p class="lead">담당 교수에게 아래 세 가지를 받은 뒤, Jupyter 토큰은 허가된 SSH 접속으로 직접 확인합니다. 이 문서에는 실제 비밀번호나 토큰이 들어 있지 않습니다.</p>
+
+    <table>
+      <thead><tr><th>받아야 할 정보</th><th>용도</th><th>확인</th></tr></thead>
+      <tbody>
+        <tr><td>Tailscale 초대</td><td>허가된 학생임을 확인하는 네트워크 로그인</td><td>□</td></tr>
+        <tr><td>학생 폴더명</td><td><code>students/&lt;학생 폴더명&gt;</code>의 개인 기본 작업 위치</td><td>□</td></tr>
+        <tr><td>공동 SSH 인증정보</td><td>최초 Jupyter 토큰 확인과 선택적 터미널 접속</td><td>□</td></tr>
+        <tr><td>Jupyter 토큰</td><td>3쪽의 SSH 명령으로 학생이 직접 확인</td><td>□</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout danger">
+      <strong>토큰과 비밀번호는 메신저 공개방·GitHub·과제 파일에 올리지 마세요.</strong><br>
+      화면 캡처를 보낼 때도 주소창의 token 값이나 로그인 입력값이 보이지 않는지 확인합니다.
+    </div>
+
+    <h3 class="mt-5">1. Tailscale 설치</h3>
+    <div class="grid-2">
+      <div class="card blue">
+        <h3>Windows</h3>
+        <p><a href="https://tailscale.com/download/windows">tailscale.com/download/windows</a></p>
+        <p class="tiny mb-0">Windows 10 이상에서 설치한 뒤 작업표시줄의 Tailscale 아이콘을 엽니다.</p>
+      </div>
+      <div class="card blue">
+        <h3>macOS</h3>
+        <p><a href="https://tailscale.com/download/mac">tailscale.com/download/mac</a></p>
+        <p class="tiny mb-0">설치 후 메뉴 막대의 Tailscale 아이콘을 열고 연결합니다.</p>
+      </div>
+    </div>
+
+    <h3 class="mt-5">2. 초대받은 이메일로 로그인</h3>
+    <ol>
+      <li>Tailscale 앱에서 <strong>Log in</strong>을 선택합니다.</li>
+      <li>담당 교수가 초대한 이메일 계정으로 로그인합니다.</li>
+      <li>앱 상태가 <strong>Connected</strong>인지 확인합니다.</li>
+    </ol>
+
+    <div class="callout warning">
+      PC에 개인용 Tailscale 계정이 이미 있다면 <strong>초대받은 학생 이메일로 계정을 전환</strong>해야 합니다. 다른 이메일로 연결하면 Notebook 주소가 열리지 않습니다.
+    </div>
+
+    <div class="route">
+      <div class="route-node">학생 PC<small>Windows / macOS</small></div>
+      <div class="route-arrow">→</div>
+      <div class="route-node">Tailscale<small>초대 이메일 인증</small></div>
+      <div class="route-arrow">→</div>
+      <div class="route-node">hai_2<small>허용된 서비스만</small></div>
+    </div>
+
+    <div class="footer"><span>HAI 연구실 Claude Notebook 시작 가이드</span><span>02 / 06</span></div>
+  </section>
+
+  <section class="page">
+    <div class="section-head">
+      <div>
+        <div class="kicker">Browser access</div>
+        <h2>Notebook에 로그인하기</h2>
+      </div>
+      <div class="page-no">03</div>
+    </div>
+
+    <h3>1. 브라우저에서 주소 열기</h3>
+    <div class="address-box">
+      <div class="label">기본 주소</div>
+      <code>http://100.116.76.42:8891/claude-notebook</code>
+    </div>
+
+    <p>Chrome 또는 Edge를 권장합니다. 이 주소는 공개 인터넷 주소가 아니므로 <strong>Tailscale이 Connected 상태일 때만</strong> 열립니다.</p>
+
+    <div class="callout warning">
+      주소가 <code>http://</code>로 시작해 브라우저에 “안전하지 않음”이 표시될 수 있습니다. 접속은 허가된 Tailscale 내부망에서만 가능하도록 제한되어 있습니다. 주소를 임의로 바꾸지 마세요.
+    </div>
+
+    <h3 class="mt-5">2. SSH로 Jupyter 토큰 확인</h3>
+    <p>Windows PowerShell 또는 macOS Terminal에서 아래 명령을 실행합니다.</p>
+
+    <pre class="code-block">ssh bai001@100.116.76.42 "cat ~/.jupyter/claude-notebook-token"</pre>
+
+    <ol>
+      <li>처음 연결할 때 질문이 나오면 주소를 확인하고 <code>yes</code>를 입력합니다.</li>
+      <li>담당 교수에게 받은 공동 SSH 비밀번호를 입력합니다. 입력 중 글자가 보이지 않는 것이 정상입니다.</li>
+      <li>화면에 출력된 한 줄짜리 토큰을 복사합니다.</li>
+    </ol>
+
+    <div class="callout danger">
+      출력된 토큰은 Notebook 로그인에만 사용하고 채팅방·과제 파일·화면 캡처에 남기지 않습니다. 토큰을 확인한 SSH 창은 바로 닫아도 됩니다.
+    </div>
+
+    <h3 class="mt-5">3. 브라우저 로그인</h3>
+    <ol>
+      <li>로그인 화면의 <strong>Password or token</strong> 입력칸에 복사한 토큰을 붙여넣습니다.</li>
+      <li><strong>Log in</strong>을 누릅니다.</li>
+    </ol>
+
+    <h3 class="mt-5">4. 내 폴더로 바로 시작하기</h3>
+    <p>담당 교수가 학생 폴더명을 알려줬다면 기본 주소 뒤에 다음 query를 붙인 전용 시작 주소를 사용할 수 있습니다.</p>
+
+    <pre class="code-block">http://100.116.76.42:8891/claude-notebook?folder=students/&lt;학생 폴더명&gt;</pre>
+
+    <p class="tiny">예시: 폴더명이 <code>student-01</code>이면 마지막 부분은 <code>folder=students/student-01</code>입니다.</p>
+
+    <p class="tiny"><strong>정상 접속 기준:</strong> 로그인 후 상단에 WORKING FOLDER, &gt;_, Claude 버튼이 보입니다.</p>
+
+    <div class="footer"><span>HAI 연구실 Claude Notebook 시작 가이드</span><span>03 / 06</span></div>
+  </section>
+
+  <section class="page">
+    <div class="section-head">
+      <div>
+        <div class="kicker">Workspace</div>
+        <h2>작업 폴더와 Claude 사용법</h2>
+      </div>
+      <div class="page-no">04</div>
+    </div>
+
+    <div class="mock-window">
+      <div class="mock-bar">
+        <span class="mock-brand">CLAUDE NOTEBOOK</span>
+        <span class="mock-button active">WORKING FOLDER</span>
+        <span class="mock-button">&gt;_</span>
+        <span class="mock-button">Claude</span>
+      </div>
+      <div class="mock-body">
+        <div class="mock-tabs">Files<br><br>Terminals<br><br>Claude</div>
+        <div class="mock-content"><strong>선택한 폴더의 파일과 작업 화면</strong><br>브라우저마다 마지막 폴더 선택을 기억합니다.</div>
+      </div>
+    </div>
+
+    <div class="grid-3">
+      <div class="card">
+        <h3>WORKING FOLDER</h3>
+        <p class="tiny mb-0">현재 작업 시작 위치를 바꿉니다. 브라우저마다 별도로 기억됩니다.</p>
+      </div>
+      <div class="card">
+        <h3>&gt;_ 터미널</h3>
+        <p class="tiny mb-0">현재 선택 폴더에서 일반 터미널을 엽니다.</p>
+      </div>
+      <div class="card">
+        <h3>Claude</h3>
+        <p class="tiny mb-0">현재 선택 폴더에서 Claude Code를 시작합니다.</p>
+      </div>
+    </div>
+
+    <h3 class="mt-5">권장 작업 순서</h3>
+    <ol>
+      <li><strong>WORKING FOLDER</strong>에서 담당 교수가 지정한 <code>students/&lt;학생 폴더명&gt;</code>을 선택합니다.</li>
+      <li>파일 탭에서 기존 자료를 확인하거나 새 파일을 만듭니다.</li>
+      <li><strong>Claude</strong> 버튼을 눌러 해당 폴더에서 AI 작업을 시작합니다.</li>
+      <li>공동 산출물은 합의한 뒤 <code>shared/</code> 폴더에 정리합니다.</li>
+    </ol>
+
+    <table>
+      <thead><tr><th>위치</th><th>권장 용도</th></tr></thead>
+      <tbody>
+        <tr><td><code>students/&lt;내 폴더&gt;</code></td><td>개인별 기본 작업 정리 위치</td></tr>
+        <tr><td><code>shared/</code></td><td>팀이 함께 사용할 코드·자료·최종 공동 산출물</td></tr>
+        <tr><td>다른 학생 폴더</td><td>공동 작업 요청이 있을 때만 열거나 수정</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout danger">
+      <strong>학생 폴더는 보안상 개인 공간이 아닙니다.</strong><br>
+      이 Notebook은 하나의 공동 계정과 작업공간을 공유합니다. 다른 학생이 전체 workspace, 열린 터미널, Claude 세션을 볼 수 있습니다. 개인정보·개인 API 키·개인 비밀번호·공개하면 안 되는 연구자료를 저장하지 마세요.
+    </div>
+
+    <div class="footer"><span>HAI 연구실 Claude Notebook 시작 가이드</span><span>04 / 06</span></div>
+  </section>
+
+  <section class="page">
+    <div class="section-head">
+      <div>
+        <div class="kicker">Optional SSH & rules</div>
+        <h2>SSH 접속과 공동 사용 규칙</h2>
+      </div>
+      <div class="page-no">05</div>
+    </div>
+
+    <h3>SSH는 토큰 확인과 필요한 경우에 사용합니다</h3>
+    <p>최초 토큰 확인 외에 파일 전송이나 별도 터미널이 필요할 때 Windows PowerShell 또는 macOS Terminal에서 다음 명령을 실행합니다.</p>
+
+    <pre class="code-block">ssh bai001@100.116.76.42</pre>
+
+    <ol>
+      <li>처음 연결할 때 host authenticity 질문이 나오면 주소가 <code>100.116.76.42</code>인지 확인하고 <code>yes</code>를 입력합니다.</li>
+      <li>담당 교수에게 받은 공동 SSH 비밀번호를 입력합니다. 입력 중에는 화면에 글자나 별표가 표시되지 않는 것이 정상입니다.</li>
+      <li>브라우저 Notebook을 사용할 때는 이 SSH 창을 계속 열어 둘 필요가 없습니다.</li>
+    </ol>
+
+    <div class="callout warning">
+      <strong><code>passwd</code>를 실행하지 마세요.</strong> 공동 계정 비밀번호를 바꾸면 다른 학생이 모두 접속하지 못합니다. <code>sudo</code> 권한 요청이나 시스템 서비스 변경도 금지합니다.
+    </div>
+
+    <div class="do-dont mt-5">
+      <div class="card teal">
+        <h3><span class="mark ok">✓</span> 해도 되는 일</h3>
+        <ul>
+          <li>지정된 학생 폴더에서 수업·연구 작업</li>
+          <li><code>shared/</code>에서 합의된 공동 편집</li>
+          <li>필요한 Python·Node 명령의 일시 실행</li>
+          <li>문제가 생기면 오류와 시간을 기록해 문의</li>
+        </ul>
+      </div>
+      <div class="card red">
+        <h3><span class="mark no">!</span> 하면 안 되는 일</h3>
+        <ul>
+          <li>계정 비밀번호·Jupyter 토큰·Claude 인증 변경</li>
+          <li>다른 내부 장비·허용되지 않은 포트 접근 시도</li>
+          <li>상시 서버·자동 시작·원격 접속 도구 설치</li>
+          <li>다른 학생 파일을 합의 없이 삭제·이동</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 class="mt-5">동시 사용 에티켓</h3>
+    <ul>
+      <li>필요 없는 Claude·터미널 탭은 닫아 메모리를 돌려줍니다.</li>
+      <li>대규모 설치·학습·빌드 작업은 시작 전 팀에 알립니다.</li>
+      <li>같은 파일을 동시에 수정할 때는 담당 구간을 먼저 정합니다.</li>
+      <li>공동 토큰과 비밀번호를 허가받지 않은 사람에게 전달하지 않습니다.</li>
+    </ul>
+
+    <div class="footer"><span>HAI 연구실 Claude Notebook 시작 가이드</span><span>05 / 06</span></div>
+  </section>
+
+  <section class="page">
+    <div class="section-head">
+      <div>
+        <div class="kicker">Troubleshooting</div>
+        <h2>문제가 생겼을 때</h2>
+      </div>
+      <div class="page-no">06</div>
+    </div>
+
+    <table class="trouble">
+      <thead><tr><th>증상</th><th>먼저 확인</th><th>해결</th></tr></thead>
+      <tbody>
+        <tr><td>주소가 열리지 않음</td><td>Tailscale이 Connected인지, 초대받은 이메일인지</td><td>계정을 전환하고 Tailscale을 다시 연결한 뒤 새로고침</td></tr>
+        <tr><td>토큰 로그인이 반복됨</td><td>앞뒤 공백 없이 토큰 전체를 복사했는지</td><td>시크릿 창에서 다시 로그인. 토큰을 채팅방에 올리지 말 것</td></tr>
+        <tr><td>WORKING FOLDER가 안 보임</td><td>오래 열린 탭이나 캐시 사용 여부</td><td>Windows <code>Ctrl+F5</code>, macOS <code>Cmd+Shift+R</code></td></tr>
+        <tr><td>Claude가 시작되지 않음</td><td>여러 Claude 탭을 동시에 열었는지</td><td>불필요한 탭을 닫고 30초 후 한 번만 다시 실행</td></tr>
+        <tr><td>SSH 비밀번호 입력이 안 보임</td><td>커서만 있고 글자가 표시되지 않는지</td><td>정상 동작. 그대로 입력 후 Enter</td></tr>
+      </tbody>
+    </table>
+
+    <h3>연결 자체를 확인하는 명령</h3>
+    <div class="grid-2">
+      <div class="card soft">
+        <h3>Windows PowerShell</h3>
+        <pre class="code-block mb-2">Test-NetConnection 100.116.76.42 -Port 8891</pre>
+        <p class="tiny mb-0"><code>TcpTestSucceeded : True</code>면 네트워크 연결은 정상입니다.</p>
+      </div>
+      <div class="card soft">
+        <h3>macOS Terminal</h3>
+        <pre class="code-block mb-2">nc -vz 100.116.76.42 8891</pre>
+        <p class="tiny mb-0"><code>succeeded</code>가 나오면 네트워크 연결은 정상입니다.</p>
+      </div>
+    </div>
+
+    <h3 class="mt-5">문의할 때 복사해서 보내기</h3>
+    <pre class="code-block">발생 시간:
+사용 PC / 운영체제:
+Tailscale 로그인 이메일:
+막힌 단계: 설치 / 접속 / 토큰 / 폴더 / Claude / SSH
+화면에 나온 오류:
+이미 시도한 조치:
+
+※ 토큰·비밀번호가 보이는 화면은 첨부하지 않습니다.</pre>
+
+    <h3>첫 접속 완료 체크리스트</h3>
+    <div class="grid-2">
+      <ul class="check-list">
+        <li>Tailscale이 Connected다.</li>
+        <li>Notebook 로그인 화면이 열린다.</li>
+        <li>Jupyter 토큰 로그인이 된다.</li>
+      </ul>
+      <ul class="check-list">
+        <li>내 WORKING FOLDER를 선택했다.</li>
+        <li>터미널이 선택 폴더에서 열린다.</li>
+        <li>Claude가 선택 폴더에서 시작된다.</li>
+      </ul>
+    </div>
+
+    <div class="footer"><span>HAI 연구실 Claude Notebook 시작 가이드</span><span>06 / 06</span></div>
+  </section>
+
+</body>
+</html>
